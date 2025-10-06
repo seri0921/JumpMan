@@ -7,7 +7,7 @@ public class SwordController : MonoBehaviour
     // この剣の持ち主（プレイヤー）
     private Player owner;
 
-    void Start()
+    /*void Start()
     {
         // 自分の親オブジェクトからPlayerControllerの情報を取得して保持する
         owner = GetComponentInParent<Player>();
@@ -16,6 +16,7 @@ public class SwordController : MonoBehaviour
             Debug.LogError("剣の親にPlayerControllerが見つかりません！");
         }
     }
+    */
     private void OnTriggerStay2D(Collider2D other)
     {
 
