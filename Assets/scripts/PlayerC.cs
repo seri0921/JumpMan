@@ -13,9 +13,8 @@ public class CumulativeRotationTracker : MonoBehaviour
     [SerializeField] private float totalRotation = 0f;   // 回転の合計
 
     [Header("角度")]
-    [SerializeField] private float Kakudo = 1f;
-
-    [SerializeField] public float jumpForce = 10f;
+    private float Kakudo;
+    public float jumpForce = 10f;
 
     private PlayerInput playerInput;
     private InputAction lStickAction;
@@ -29,16 +28,19 @@ public class CumulativeRotationTracker : MonoBehaviour
 
     void Awake()
     {
+        KillScore.Reset();
         rb = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
         lStickAction = playerInput.actions["LStick"];
+        Kakudo = KillScore.rotateLevel;
+
     }
 
     void Update()
     {
         // 新しく追加した画面端のワープ処理を呼び出す
         HandleScreenWrap();
-
+        Kakudo = KillScore.rotateLevel;
 
         Vector2 stickInput = lStickAction.ReadValue<Vector2>();
 
@@ -72,7 +74,7 @@ public class CumulativeRotationTracker : MonoBehaviour
             rb.rotation = (playerStartAngle + totalRotation) * Kakudo;
 
             // デバッグ表示
-            Debug.Log($"現在の角度: {currentAngle:F2}, 差分: {deltaAngle:F2}, 回転合計: {totalRotation:F2}°");
+           // Debug.Log($"現在の角度: {currentAngle:F2}, 差分: {deltaAngle:F2}, 回転合計: {totalRotation:F2}°");
         }
         else
         {
@@ -80,7 +82,7 @@ public class CumulativeRotationTracker : MonoBehaviour
             if (isTracking)
             {
                 isTracking = false;
-                Debug.Log("--- スティックが中央に戻りました ---");
+           //     Debug.Log("--- スティックが中央に戻りました ---");
             }
         }
     }

@@ -874,13 +874,13 @@ Transform:
   - {fileID: 2051691292}
   - {fileID: 1078957799}
   - {fileID: 92012897}
+  - {fileID: 473171083}
   - {fileID: 1071110396}
   - {fileID: 2070300766}
   - {fileID: 1097710549}
   - {fileID: 485065214}
   - {fileID: 1708872311}
   - {fileID: 376979622}
-  - {fileID: 473171083}
   - {fileID: 2008514253}
   - {fileID: 842647966}
   m_Father: {fileID: 0}
@@ -2685,7 +2685,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 16.320368, y: -5.8537593, z: 0.1269923}
-  m_LocalScale: {x: 5.4313974, y: 3.7535288, z: 1}
+  m_LocalScale: {x: 5.4313974, y: 3.753529, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 232321710}
@@ -4506,7 +4506,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &842647962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9140,6 +9140,7 @@ GameObject:
   - component: {fileID: 2008514255}
   - component: {fileID: 2008514258}
   - component: {fileID: 2008514257}
+  - component: {fileID: 2008514260}
   m_Layer: 0
   m_Name: player1
   m_TagString: Player
@@ -9306,7 +9307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deadzone: 0.2
   totalRotation: 0
-  Kakudo: 1
+  jumpForce: 10
 --- !u!114 &2008514258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9337,6 +9338,20 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &2008514260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008514251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c5581c4c61e9943919154b87dedb62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  largeRt: 180
+  smallRt: 30
 --- !u!1 &2014414694
 GameObject:
   m_ObjectHideFlags: 0
