@@ -9234,7 +9234,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -9305,7 +9305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deadzone: 0.2
-  Kakudo: 1.5
+  totalRotation: 0
+  Kakudo: 1
 --- !u!114 &2008514258
 MonoBehaviour:
   m_ObjectHideFlags: 0
