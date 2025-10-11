@@ -1,79 +1,127 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// PlayerInputコンポーネントを必須にする
 [RequireComponent(typeof(PlayerInput))]
-public class StickAngleDebugger : MonoBehaviour
+public class CumulativeRotationTracker : MonoBehaviour
 {
     [Header("入力設定")]
     [Tooltip("この値より小さいスティックの傾きは無視")]
     [Range(0.1f, 0.9f)]
     [SerializeField] private float deadzone = 0.2f;
 
-    private PlayerInput playerInput;
-    private InputAction LstickAction;
-    private Rigidbody2D rb;
-
-    private bool isTracking = false; // 角度の追跡中かどうか
-
-    private float stickStartAngle; // 基準となる角度
-    private float playerStartAngle; // プレイヤーの角度
-    private bool isAngleSet;   // 回転の合計角度
+    [Header("デバッグ")]
+    [SerializeField] private float totalRotation = 0f;   // 回転の合計
 
     [Header("角度")]
-    [SerializeField] private float Kakudo = 10f;
+    [SerializeField] private float Kakudo = 1f;
+
+    [SerializeField] public float jumpForce = 10f;
+
+    private PlayerInput playerInput;
+    private InputAction lStickAction;
+    private Rigidbody2D rb;
+
+    private bool isTracking = false; // スティック操作中かどうか
+    private float startAngle = 0f;
+    private float playerStartAngle = 0f;
+
+
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        // 必要なコンポーネントとアクションを取得
         playerInput = GetComponent<PlayerInput>();
-        LstickAction = playerInput.actions["LStick"];
+        lStickAction = playerInput.actions["LStick"];
     }
 
     void Update()
     {
-        // スティック入力の読み取り
-        Vector2 stickInput = LstickAction.ReadValue<Vector2>();
+        // 新しく追加した画面端のワープ処理を呼び出す
+        HandleScreenWrap();
 
-        // スティックがデッドゾーンの外まで倒されているかチェック
+
+        Vector2 stickInput = lStickAction.ReadValue<Vector2>();
+
         if (stickInput.magnitude > deadzone)
         {
-            // 現在のスティックの角度を度数法で計算
+            // スティックの角度を計算
             float currentAngle = Mathf.Atan2(stickInput.y, stickInput.x) * Mathf.Rad2Deg;
 
-            // 基準の角度がまだ設定されていない場合 (倒し始めの瞬間)
-            if (!isAngleSet)
+            // スティックを倒し始めた瞬間
+            if (!isTracking)
             {
-                // 現在の角度を基準として保存
-                stickStartAngle = currentAngle;
-                // プレイヤーの現在の角度を保存
-                playerStartAngle = rb.rotation;
+                isTracking = true;
 
-                isAngleSet = true; // フラグを立てる
+                playerStartAngle = rb.rotation; // プレイヤーの現在の角度を最初の角度に
+                // 最初の角度を「前の角度」とする
+                startAngle = currentAngle;
+
+                totalRotation = 0f;
             }
 
-            // 時計回りをプラス
-            float relativeAngle = Mathf.DeltaAngle(stickStartAngle, currentAngle) * -1f;
+            // 前のフレームからの角度の変化量を計算
+            float deltaAngle = Mathf.DeltaAngle(startAngle, currentAngle);
 
-            if (relativeAngle < 0)
-            {
-                relativeAngle += 360f;
-            }
+            // 変化量を合計に加算
+            totalRotation += deltaAngle;
 
-            rb.rotation = (playerStartAngle - relativeAngle) * Kakudo ;
-            // 右方向への移動がプラス、左方向がマイナスになります
-            Debug.Log($"基準からの角度差: {relativeAngle:F2}°");
+            // 次のフレームのために現在の角度を保存
+            startAngle = currentAngle;
+
+
+            rb.rotation = (playerStartAngle + totalRotation) * Kakudo;
+
+            // デバッグ表示
+            Debug.Log($"現在の角度: {currentAngle:F2}, 差分: {deltaAngle:F2}, 回転合計: {totalRotation:F2}°");
         }
         else
         {
-            // スティックが中央に戻された場合
-            // 基準角度をリセットする
-            if (isAngleSet)
+            // スティックが中央に戻ったらリセット
+            if (isTracking)
             {
-                Debug.Log("--- スティックが中央に戻されたため、基準をリセット ---");
-                isAngleSet = false;
+                isTracking = false;
+                Debug.Log("--- スティックが中央に戻りました ---");
             }
         }
     }
+
+
+    private void HandleScreenWrap()
+    {
+        // 現在の位置情報を取得
+        Vector3 newPosition = transform.position;
+
+        // x座標が12より大きくなったら
+        if (newPosition.x > 9f)
+        {
+            // x座標を-12にする
+            newPosition.x = -9f;
+        }
+        // x座標が-12より小さくなったら
+        else if (newPosition.x < -9f)
+        {
+            // x座標を12にする
+            newPosition.x = 9f;
+        }
+        // x座標が12より大きくなったら
+        if (newPosition.y < -6f)
+        {
+            // x座標を-12にする
+            newPosition.y = 5f;
+        }
+
+        // 計算後の新しい位置をオブジェクトに適用
+        transform.position = newPosition;
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        }
+
+    }
+
 }
+
