@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     public float jumpForce = 10f;
     public float knockbackForce = 8f;
 
+    [SerializeField]
+    public float playerHP;
     private Rigidbody2D rb;
 
     private Vector3 startpos;
