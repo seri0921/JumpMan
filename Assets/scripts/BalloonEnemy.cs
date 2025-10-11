@@ -36,31 +36,32 @@ public class BalloonEnemy : MonoBehaviour
         if (other.CompareTag("sword"))
         {
             spawner.EnemyDestroyed();
+            KillScore.killScore++;
             Destroy(gameObject);
         }
-        // if (other.CompareTag("Player"))
-        // {
-        //     //プレイヤーにダメージを与える
-        //     other.gameObject.GetComponent<Player>().playerHP--;
-        //     //プレイヤーにダメージを与えたらノックバック、それ以外は死亡
-        //     if (other.gameObject.GetComponent<Player>().playerHP > 0)
-        //     {
-        //         Debug.Log(other.gameObject.GetComponent<Player>().playerHP);
+        if (other.CompareTag("Player"))
+        {
+            //プレイヤーにダメージを与える
+            other.gameObject.GetComponent<Player>().playerHP--;
+            //プレイヤーにダメージを与えたらノックバック、それ以外は死亡
+            if (other.gameObject.GetComponent<Player>().playerHP > 0)
+            {
+                Debug.Log(other.gameObject.GetComponent<Player>().playerHP);
 
-        //         Rigidbody2D playerRb = other.GetComponent<Rigidbody2D>();
-        //         // 自分（このオブジェクト）から相手への方向ベクトルを計算
-        //         Vector2 direction = (other.transform.position - transform.position).normalized;
-        //         // その方向にノックバックする
-        //         playerRb.AddForce(direction * knockbackPower, ForceMode2D.Impulse);
+                Rigidbody2D playerRb = other.GetComponent<Rigidbody2D>();
+                // 自分（このオブジェクト）から相手への方向ベクトルを計算
+                Vector2 direction = (other.transform.position - transform.position).normalized;
+                // その方向にノックバックする
+                playerRb.AddForce(direction * knockbackPower, ForceMode2D.Impulse);
 
-        //     }
-        //     else
-        //     {
-        //         other.gameObject.GetComponent<Player>().Die();
-        //         Destroy(gameObject);
-        //     }
+            }
+            else
+            {
+                other.gameObject.GetComponent<Player>().Die();
+                Destroy(gameObject);
+            }
 
-        // }
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
