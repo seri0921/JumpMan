@@ -10,7 +10,7 @@ public class Skill : MonoBehaviour
         [Header("以下の角度")]
         [SerializeField] private float smallRt = 30f;
 
-        private bool isGrounded = false;      // 接地しているかどうかのフラグ
+        private bool isGrounded = true;      // 接地しているかどうかのフラグ
         private float TakeoffRt;     // 離陸した瞬間のプレイヤーのZ角度
         private Rigidbody2D rb;
 
@@ -20,10 +20,10 @@ public class Skill : MonoBehaviour
         }
 
         // 他のコライダーに接触したとき
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D col)
         {
             // タグが"Ground"かつ、空中にいたときか
-            if (collision.gameObject.CompareTag("Ground") && !isGrounded)
+            if (col.gameObject.CompareTag("Ground") && !isGrounded)
             {
                 isGrounded = true;
 
@@ -34,27 +34,28 @@ public class Skill : MonoBehaviour
                 // 1. 前回の着地から次の着地までに〇°以上回転
                 if (AirRt >= largeRt)
                 {
-                    Debug.Log($"条件達成: {largeRt}°以上の回転！");
-                KillScore.rotateLevel ++;
+                    // Debug.Log($"条件達成: {largeRt}°以上の回転！");
+                    KillScore.rotateLevel ++;
                 }
 
                 // 2. 前回の着地から次の着地までに〇°以下回転
                 if (AirRt <= smallRt)
                 {
-                    Debug.Log($"条件達成: {smallRt}°以下の回転でした。");
+                    // Debug.Log($"条件達成: {smallRt}°以下の回転でした。");
                 }
 
                 // 3. 前回の着地から次の着地までの回転が85~95°以内
                 if (AirRt >= 85f && AirRt <= 95f)
                 {
-                    Debug.Log("条件達成: 85°～95°");
-
+                    //Debug.Log("条件達成: 85°～95°");
                 }
+
+                AirRt = 0f;
             }
         }
 
 
-        private void OnCollisionExit2D(Collision2D collision)
+        private void OnTriggerExit2D(Collider2D collision)
         {
             // タグが "Ground" から離れたとき
             if (collision.gameObject.CompareTag("Ground"))
@@ -63,10 +64,9 @@ public class Skill : MonoBehaviour
                 if (isGrounded)
                 {
                     TakeoffRt = rb.rotation;
-                    Debug.Log($"離陸！ この瞬間の角度を記録: {TakeoffRt:F2}°");
+                    // Debug.Log($"離陸！ この瞬間の角度を記録: {TakeoffRt:F2}°");
                 }
                 isGrounded = false; // 空中状態に更新
             }
         }
-    
 }
