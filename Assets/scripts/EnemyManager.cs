@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private float spawnTime;
     private int currentEnemies = 0; // 現在の敵数
-    [SerializeField] private int maxEnemies = 5; // 🔹最大敵数
+    [SerializeField] private int maxEnemies = 5; // 最大敵数
 
     [SerializeField] private float spawnRadius = 5f; // プレイヤーの周囲半径
 
