@@ -35,6 +35,13 @@ public class Player : MonoBehaviour
         }
         // 新しく追加した画面端のワープ処理を呼び出す
         HandleScreenWrap();
+
+        if (playerHP < 0)
+        {
+            Die();
+            playerHP += 2;
+        }
+
     }
     private void HandleScreenWrap()
     {
