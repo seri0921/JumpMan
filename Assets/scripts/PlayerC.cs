@@ -4,15 +4,19 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class CumulativeRotationTracker : MonoBehaviour
 {
-    [Header("“ü—ÍÝ’è")]
-    [Tooltip("‚±‚Ì’l‚æ‚è¬‚³‚¢ƒXƒeƒBƒbƒN‚ÌŒX‚«‚Í–³Ž‹")]
+    //ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã¦
+
+
+
+    [Header("ï¿½ï¿½ï¿½ÍÝ’ï¿½")]
+    [Tooltip("ï¿½ï¿½ï¿½Ì’lï¿½ï¿½è¬ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½eï¿½Bï¿½bï¿½Nï¿½ÌŒXï¿½ï¿½ï¿½Í–ï¿½ï¿½ï¿½")]
     [Range(0.1f, 0.9f)]
     [SerializeField] private float deadzone = 0.2f;
 
-    [Header("ƒfƒoƒbƒO")]
-    [SerializeField] private float totalRotation = 0f;   // ‰ñ“]‚Ì‡Œv
+    [Header("ï¿½fï¿½oï¿½bï¿½O")]
+    [SerializeField] private float totalRotation = 0f;   // ï¿½ï¿½]ï¿½Ìï¿½ï¿½v
 
-    [Header("Šp“x")]
+    [Header("ï¿½pï¿½x")]
     private float Kakudo;
     public float jumpForce = 10f;
 
@@ -20,9 +24,11 @@ public class CumulativeRotationTracker : MonoBehaviour
     private InputAction lStickAction;
     private Rigidbody2D rb;
 
-    private bool isTracking = false; // ƒXƒeƒBƒbƒN‘€ì’†‚©‚Ç‚¤‚©
+    private bool isTracking = false; // ï¿½Xï¿½eï¿½Bï¿½bï¿½Nï¿½ï¿½ï¿½ì’†ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½
     private float startAngle = 0f;
     private float playerStartAngle = 0f;
+
+    public float knockbackForce = 8f;
 
 
 
@@ -38,7 +44,7 @@ public class CumulativeRotationTracker : MonoBehaviour
 
     void Update()
     {
-        // V‚µ‚­’Ç‰Á‚µ‚½‰æ–Ê’[‚Ìƒ[ƒvˆ—‚ðŒÄ‚Ño‚·
+        // ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê’[ï¿½Ìƒï¿½ï¿½[ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚Ñoï¿½ï¿½
         HandleScreenWrap();
         Kakudo = KillScore.rotateLevel;
 
@@ -46,43 +52,43 @@ public class CumulativeRotationTracker : MonoBehaviour
 
         if (stickInput.magnitude > deadzone)
         {
-            // ƒXƒeƒBƒbƒN‚ÌŠp“x‚ðŒvŽZ
+            // ï¿½Xï¿½eï¿½Bï¿½bï¿½Nï¿½ÌŠpï¿½xï¿½ï¿½ï¿½vï¿½Z
             float currentAngle = Mathf.Atan2(stickInput.y, stickInput.x) * Mathf.Rad2Deg;
 
-            // ƒXƒeƒBƒbƒN‚ð“|‚µŽn‚ß‚½uŠÔ
+            // ï¿½Xï¿½eï¿½Bï¿½bï¿½Nï¿½ï¿½|ï¿½ï¿½ï¿½nï¿½ß‚ï¿½ï¿½uï¿½ï¿½
             if (!isTracking)
             {
                 isTracking = true;
 
-                playerStartAngle = rb.rotation; // ƒvƒŒƒCƒ„[‚ÌŒ»Ý‚ÌŠp“x‚ðÅ‰‚ÌŠp“x‚É
-                // Å‰‚ÌŠp“x‚ðu‘O‚ÌŠp“xv‚Æ‚·‚é
+                playerStartAngle = rb.rotation; // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌŒï¿½ï¿½Ý‚ÌŠpï¿½xï¿½ï¿½ï¿½Åï¿½ï¿½ÌŠpï¿½xï¿½ï¿½
+                // ï¿½Åï¿½ï¿½ÌŠpï¿½xï¿½ï¿½ï¿½uï¿½Oï¿½ÌŠpï¿½xï¿½vï¿½Æ‚ï¿½ï¿½ï¿½
                 startAngle = currentAngle;
 
                 totalRotation = 0f;
             }
 
-            // ‘O‚ÌƒtƒŒ[ƒ€‚©‚ç‚ÌŠp“x‚Ì•Ï‰»—Ê‚ðŒvŽZ
+            // ï¿½Oï¿½Ìƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌŠpï¿½xï¿½Ì•Ï‰ï¿½ï¿½Ê‚ï¿½ï¿½vï¿½Z
             float deltaAngle = Mathf.DeltaAngle(startAngle, currentAngle);
 
-            // •Ï‰»—Ê‚ð‡Œv‚É‰ÁŽZ
+            // ï¿½Ï‰ï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½vï¿½É‰ï¿½ï¿½Z
             totalRotation += deltaAngle;
 
-            // ŽŸ‚ÌƒtƒŒ[ƒ€‚Ì‚½‚ß‚ÉŒ»Ý‚ÌŠp“x‚ð•Û‘¶
+            // ï¿½ï¿½ï¿½Ìƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ß‚ÉŒï¿½ï¿½Ý‚ÌŠpï¿½xï¿½ï¿½Û‘ï¿½
             startAngle = currentAngle;
 
 
             rb.rotation = (playerStartAngle + totalRotation) * Kakudo;
 
-            // ƒfƒoƒbƒO•\Ž¦
-           // Debug.Log($"Œ»Ý‚ÌŠp“x: {currentAngle:F2}, ·•ª: {deltaAngle:F2}, ‰ñ“]‡Œv: {totalRotation:F2}‹");
+            // ï¿½fï¿½oï¿½bï¿½Oï¿½\ï¿½ï¿½
+           // Debug.Log($"ï¿½ï¿½ï¿½Ý‚ÌŠpï¿½x: {currentAngle:F2}, ï¿½ï¿½ï¿½ï¿½: {deltaAngle:F2}, ï¿½ï¿½]ï¿½ï¿½ï¿½v: {totalRotation:F2}ï¿½ï¿½");
         }
         else
         {
-            // ƒXƒeƒBƒbƒN‚ª’†‰›‚É–ß‚Á‚½‚çƒŠƒZƒbƒg
+            // ï¿½Xï¿½eï¿½Bï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É–ß‚ï¿½ï¿½ï¿½ï¿½çƒŠï¿½Zï¿½bï¿½g
             if (isTracking)
             {
                 isTracking = false;
-           //     Debug.Log("--- ƒXƒeƒBƒbƒN‚ª’†‰›‚É–ß‚è‚Ü‚µ‚½ ---");
+           //     Debug.Log("--- ï¿½Xï¿½eï¿½Bï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É–ß‚ï¿½Ü‚ï¿½ï¿½ï¿½ ---");
             }
         }
     }
@@ -90,29 +96,29 @@ public class CumulativeRotationTracker : MonoBehaviour
 
     private void HandleScreenWrap()
     {
-        // Œ»Ý‚ÌˆÊ’uî•ñ‚ðŽæ“¾
+        // ï¿½ï¿½ï¿½Ý‚ÌˆÊ’uï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
         Vector3 newPosition = transform.position;
 
-        // xÀ•W‚ª12‚æ‚è‘å‚«‚­‚È‚Á‚½‚ç
+        // xï¿½ï¿½ï¿½Wï¿½ï¿½12ï¿½ï¿½ï¿½å‚«ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½
         if (newPosition.x > 9f)
         {
-            // xÀ•W‚ð-12‚É‚·‚é
+            // xï¿½ï¿½ï¿½Wï¿½ï¿½-12ï¿½É‚ï¿½ï¿½ï¿½
             newPosition.x = -9f;
         }
-        // xÀ•W‚ª-12‚æ‚è¬‚³‚­‚È‚Á‚½‚ç
+        // xï¿½ï¿½ï¿½Wï¿½ï¿½-12ï¿½ï¿½è¬ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½
         else if (newPosition.x < -9f)
         {
-            // xÀ•W‚ð12‚É‚·‚é
+            // xï¿½ï¿½ï¿½Wï¿½ï¿½12ï¿½É‚ï¿½ï¿½ï¿½
             newPosition.x = 9f;
         }
-        // xÀ•W‚ª12‚æ‚è‘å‚«‚­‚È‚Á‚½‚ç
+        // xï¿½ï¿½ï¿½Wï¿½ï¿½12ï¿½ï¿½ï¿½å‚«ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½
         if (newPosition.y < -6f)
         {
-            // xÀ•W‚ð-12‚É‚·‚é
+            // xï¿½ï¿½ï¿½Wï¿½ï¿½-12ï¿½É‚ï¿½ï¿½ï¿½
             newPosition.y = 5f;
         }
 
-        // ŒvŽZŒã‚ÌV‚µ‚¢ˆÊ’u‚ðƒIƒuƒWƒFƒNƒg‚É“K—p
+        // ï¿½vï¿½Zï¿½ï¿½ÌVï¿½ï¿½ï¿½ï¿½ï¿½Ê’uï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½É“Kï¿½p
         transform.position = newPosition;
     }
     void OnCollisionEnter2D(Collision2D collision)
@@ -123,6 +129,18 @@ public class CumulativeRotationTracker : MonoBehaviour
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         }
 
+    }
+
+
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒŽãƒƒã‚¯ãƒãƒƒã‚¯å‡¦ç†
+    public void HandleSwordClash()
+    {
+        // ( ... å‰£ã®è¡çªå‡¦ç†ã¯å¤‰æ›´ãªã— ... )
+        rb.linearVelocity = Vector2.zero;
+        Vector2 backwardDir = -transform.up;
+        Vector2 knockbackDir = new Vector2(backwardDir.x, Mathf.Abs(backwardDir.y));
+        if (knockbackDir.y < 0.1f) { knockbackDir.y = 0.1f; }
+        rb.AddForce(knockbackDir.normalized * knockbackForce, ForceMode2D.Impulse);
     }
 
 }
