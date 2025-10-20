@@ -90,18 +90,19 @@ public class BalloonEnemy : MonoBehaviour
                 Debug.Log("a");
             }
         }
+
         if (collision.gameObject.CompareTag("Player"))
         {
             // 白風船の処理
             if (!redBalloon)
             {
-                GameManager.instance.player.playerHP--; // プレイヤーにダメージを与える
+                // GameManager.instance.player.playerHP--; // プレイヤーにダメージを与える
                 Destroy(gameObject, 0.05f);
                 spawner.EnemyDestroyed(); // エネミーの数を減らす
             }
             else
             {
-                GameManager.instance.player.playerHP--;
+                //GameManager.instance.player.playerHP--;
                 GameManager.instance.player.HandleSwordClash(); // プレイヤーをノックバック
             }
 

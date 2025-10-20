@@ -48,16 +48,6 @@ public class ExpandBalloon : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && isExpand)
-        {
-            GameManager.instance.player.playerHP--; // プレイヤーにダメージを与える
-            GameManager.instance.player.HandleSwordClash(); // プレイヤーをノックバック
-            isExpand = false;
-            Debug.Log("プレイヤーにダメージ");
-        }
-    }
 
     // 点滅させるための処理
     private IEnumerator BlinkFaster()
