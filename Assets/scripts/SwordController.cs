@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // ���ɂ�Collider2D���K�{
 [RequireComponent(typeof(Collider2D))]

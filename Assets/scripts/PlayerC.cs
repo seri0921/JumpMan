@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerC: MonoBehaviour
 {
+    public CameraShake cameraShake;
+
     //ダメージを受けて
     [SerializeField]
     public int playerHP; //プレイヤーのHP
@@ -12,10 +14,10 @@ public class PlayerC: MonoBehaviour
     [Range(0.1f, 0.9f)]
     [SerializeField] private float deadzone = 0.2f;
 
-    [Header("�f�o�b�O")]
-    [SerializeField] private float totalRotation = 0f;   // 
+    [Header("合計角度")]
+    [SerializeField] private float totalRotation = 0f;   
 
-    [Header("�p�x")]
+    [Header("ジャンプ力")]
     private float Kakudo;
     public float jumpForce = 10f;
 
@@ -23,7 +25,7 @@ public class PlayerC: MonoBehaviour
     private InputAction lStickAction;
     private Rigidbody2D rb;
 
-    private bool isTracking = false; // 
+    private bool isTracking = false; 
     private float startAngle = 0f;
     private float playerStartAngle = 0f;
 
@@ -49,8 +51,6 @@ public class PlayerC: MonoBehaviour
 
     void Update()
     {
-
-        // �V�����ǉ�������ʒ[�̃��[�v�������Ăяo��
         HandleScreenWrap();
         Kakudo = KillScore.rotateLevel;
 
@@ -58,43 +58,33 @@ public class PlayerC: MonoBehaviour
 
         if (stickInput.magnitude > deadzone)
         {
-            // �X�e�B�b�N�̊p�x���v�Z
             float currentAngle = Mathf.Atan2(stickInput.y, stickInput.x) * Mathf.Rad2Deg;
 
-            // �X�e�B�b�N��|���n�߂��u��
             if (!isTracking)
             {
                 isTracking = true;
 
-                playerStartAngle = rb.rotation; // �v���C���[�̌��݂̊p�x���ŏ��̊p�x��
-                // �ŏ��̊p�x���u�O�̊p�x�v�Ƃ���
+                playerStartAngle = rb.rotation; 
                 startAngle = currentAngle;
 
                 totalRotation = 0f;
             }
 
-            // �O�̃t���[������̊p�x�̕ω��ʂ��v�Z
             float deltaAngle = Mathf.DeltaAngle(startAngle, currentAngle);
 
-            // �ω��ʂ����v�ɉ��Z
             totalRotation += deltaAngle;
 
-            // ���̃t���[���̂��߂Ɍ��݂̊p�x��ۑ�
             startAngle = currentAngle;
 
 
             rb.rotation = (playerStartAngle + totalRotation) * Kakudo;
 
-            // �f�o�b�O�\��
-            // Debug.Log($"���݂̊p�x: {currentAngle:F2}, ����: {deltaAngle:F2}, ��]���v: {totalRotation:F2}��");
         }
         else
         {
-            // �X�e�B�b�N�������ɖ߂����烊�Z�b�g
             if (isTracking)
             {
                 isTracking = false;
-                //     Debug.Log("--- �X�e�B�b�N�������ɖ߂�܂��� ---");
             }
         }
         
@@ -108,35 +98,30 @@ public class PlayerC: MonoBehaviour
 
     private void HandleScreenWrap()
     {
-        // ���݂̈ʒu�����擾
         Vector3 newPosition = transform.position;
 
-        // x���W��12���傫���Ȃ�����
         if (newPosition.x > 9f)
         {
-            // x���W��-12�ɂ���
             newPosition.x = -9f;
         }
-        // x���W��-12��菬�����Ȃ�����
+
         else if (newPosition.x < -9f)
         {
-            // x���W��12�ɂ���
             newPosition.x = 9f;
         }
-        // x���W��12���傫���Ȃ�����
         if (newPosition.y < -6f)
         {
-            // x���W��-12�ɂ���
             newPosition.y = 5f;
         }
 
-        // �v�Z��̐V�����ʒu���I�u�W�F�N�g�ɓK�p
         transform.position = newPosition;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            // SoundManager.instance.JunpSound();   // ジャンプ音
+            cameraShake.ShakeCamera(CameraShake.ShakeType.Light);
             rb.linearVelocity = Vector2.zero;
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         }
@@ -166,9 +151,11 @@ public class PlayerC: MonoBehaviour
 
     public void Die()
     {
+        cameraShake.ShakeCamera(CameraShake.ShakeType.Heavy);
         Debug.Log(gameObject.name + " は倒された！");
         // このゲームオブジェクトを非表示にする
         gameObject.transform.position = startpos;
+        // SoundManager.instance.PlayerDamageSound();
     }
 
 }

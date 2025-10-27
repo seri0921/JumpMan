@@ -77,10 +77,12 @@ public class BalloonEnemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("sword"))
         {
+            print("敵に触れる");
             // 白風船の処理
             if (!redBalloon)
             {
-                GameManager.instance.player.HandleSwordClash(knockbackForce); // プレイヤーをノックバック
+                print("敵に処理開始");
+               // GameManager.instance.player.HandleSwordClash(knockbackForce); // プレイヤーをノックバック
                 Instantiate(enemyDestroyEffect, transform.position, Quaternion.identity);
                 Destroy(gameObject, 0.05f);
                 spawner.EnemyDestroyed(); // エネミーの数を減らす
@@ -89,8 +91,9 @@ public class BalloonEnemy : MonoBehaviour
             }
             else
             {
+                print("敵に処理開始");
                 knockbackForce *= 2;
-                GameManager.instance.player.HandleSwordClash(knockbackForce); // プレイヤーをノックバック
+             // GameManager.instance.player.HandleSwordClash(knockbackForce); // プレイヤーをノックバック
                 redBalloon = false;
                 UpdateBalloonColor();
                 Debug.Log("a");
@@ -102,15 +105,15 @@ public class BalloonEnemy : MonoBehaviour
             // 白風船の処理
             if (!redBalloon)
             {
-                GameManager.instance.player.playerHP--; // プレイヤーにダメージを与える
-                GameManager.instance.player.HandleSwordClash(knockbackForce); // プレイヤーをノックバック
+                KillScore.LifeOrBullet--;
+
                 Destroy(gameObject, 0.05f);
                 spawner.EnemyDestroyed(); // エネミーの数を減らす
             }
             else
             {
-                GameManager.instance.player.playerHP--;
-                GameManager.instance.player.HandleSwordClash(knockbackForce); // プレイヤーをノックバック
+                KillScore.LifeOrBullet--;
+
             }
 
         }
