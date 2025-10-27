@@ -155,7 +155,7 @@ public class PlayerC: MonoBehaviour
         Debug.Log(gameObject.name + " は倒された！");
         // このゲームオブジェクトを非表示にする
         gameObject.transform.position = startpos;
-        //SoundManager.instance.PlayerDamageSound();
+        // SoundManager.instance.PlayerDamageSound();
     }
 
 }
