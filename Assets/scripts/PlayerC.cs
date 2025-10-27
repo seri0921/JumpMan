@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 public class CumulativeRotationTracker : MonoBehaviour
 {
     //ダメージを受けて
+    [SerializeField]
+    public float playerHP;
 
     [SerializeField]
     public int playerHP; //プレイヤーのHP
@@ -12,8 +14,7 @@ public class CumulativeRotationTracker : MonoBehaviour
     private Vector3 startpos;
 
 
-    [Header("���͐ݒ�")]
-    [Tooltip("���̒l��菬�����X�e�B�b�N�̌X���͖���")]
+    
     [Range(0.1f, 0.9f)]
     [SerializeField] private float deadzone = 0.2f;
 
@@ -148,6 +149,13 @@ public class CumulativeRotationTracker : MonoBehaviour
 
     }
 
+    //public void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if(collision.gameObject.CompareTag("Enemy"))
+    //    {
+    //        playerHP--;
+    //    }
+    //}
 
     // プレイヤーノックバック処理
     public void HandleSwordClash(float power)
