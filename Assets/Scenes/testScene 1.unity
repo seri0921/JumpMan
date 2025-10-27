@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9572fbb860a09e448ab28338cc6e302f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2008514257}
+  player: {fileID: 0}
 --- !u!4 &79386140
 Transform:
   m_ObjectHideFlags: 0
@@ -9500,7 +9500,7 @@ MonoBehaviour:
   playerType: 0
   rotateSpeed: 200
   jumpForce: 8
-  playerHP: 1
+  playerHP: 0
 --- !u!50 &2008514255
 Rigidbody2D:
   serializedVersion: 5
@@ -9586,7 +9586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c436f1012ea13c54d8b16da7a072e02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHP: 1
+  playerHP: 0
   deadzone: 0.2
   totalRotation: 0
   jumpForce: 8
