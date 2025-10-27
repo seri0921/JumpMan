@@ -1,25 +1,19 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInput))]
-public class CumulativeRotationTracker : MonoBehaviour
+public class PlayerC: MonoBehaviour
 {
     //ダメージを受けて
-    [SerializeField]
-    public float playerHP;
-
     [SerializeField]
     public int playerHP; //プレイヤーのHP
     private int firstPlayerHP;
     private Vector3 startpos;
-
-
     
     [Range(0.1f, 0.9f)]
     [SerializeField] private float deadzone = 0.2f;
 
     [Header("�f�o�b�O")]
-    [SerializeField] private float totalRotation = 0f;   // ��]�̍��v
+    [SerializeField] private float totalRotation = 0f;   // 
 
     [Header("�p�x")]
     private float Kakudo;
@@ -29,7 +23,7 @@ public class CumulativeRotationTracker : MonoBehaviour
     private InputAction lStickAction;
     private Rigidbody2D rb;
 
-    private bool isTracking = false; // �X�e�B�b�N���쒆���ǂ���
+    private bool isTracking = false; // 
     private float startAngle = 0f;
     private float playerStartAngle = 0f;
 
