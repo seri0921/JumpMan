@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9572fbb860a09e448ab28338cc6e302f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 2008514257}
 --- !u!4 &79386140
 Transform:
   m_ObjectHideFlags: 0
@@ -7573,6 +7573,81 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1691161091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1691161093}
+  - component: {fileID: 1691161092}
+  m_Layer: 0
+  m_Name: ShakeCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1691161092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691161091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8061314c0cca7524cad71631286ec2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultShake:
+    strength: 0.4
+    speed: 10
+    duration: 0.2
+    randomness: 1
+    fadeOut: 0.1
+  lightShake:
+    strength: 0.05
+    speed: 15
+    duration: 0.1
+    randomness: 1
+    fadeOut: 0.1
+  mediumShake:
+    strength: 0.1
+    speed: 10
+    duration: 0.2
+    randomness: 1
+    fadeOut: 0.1
+  heavyShake:
+    strength: 0.3
+    speed: 8
+    duration: 0.5
+    randomness: 1
+    fadeOut: 0.1
+  OnShakeStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShakeEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  enableDebugKeys: 1
+--- !u!4 &1691161093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691161091}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.7091706, y: 0.63541996, z: -0.0007623761}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1702807465
 GameObject:
   m_ObjectHideFlags: 0
@@ -8793,6 +8868,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1885194353
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1885194355}
+  - component: {fileID: 1885194354}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1885194354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885194353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00062213890fd204c8c01c1ad9fe92c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmSound: {fileID: 0}
+  killSound: {fileID: 0}
+  playerDamageSound: {fileID: 0}
+  junpSound: {fileID: 0}
+--- !u!4 &1885194355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885194353}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.462016, y: 2.2325547, z: -0.043680295}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1888095424
 GameObject:
   m_ObjectHideFlags: 0
@@ -9476,8 +9599,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008514251}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.002632618, y: 0.3762406, z: 0.1269923}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.76, y: 1.23, z: 0.1269923}
   m_LocalScale: {x: 0.5853101, y: 0.5853101, z: 0.5853101}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9586,7 +9709,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c436f1012ea13c54d8b16da7a072e02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHP: 0
+  cameraShake: {fileID: 1691161092}
+  playerHP: 1
   deadzone: 0.2
   totalRotation: 0
   jumpForce: 8
@@ -10022,3 +10146,5 @@ SceneRoots:
   - {fileID: 1937947096}
   - {fileID: 228536924}
   - {fileID: 79386140}
+  - {fileID: 1691161093}
+  - {fileID: 1885194355}
