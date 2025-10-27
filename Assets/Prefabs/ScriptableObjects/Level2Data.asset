@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea95edf64e8620d449c3239f6fe5b88c, type: 3}
+  m_Name: Level2Data
+  m_EditorClassIdentifier: 
+  enemyList:
+  - enemyName: RedBalloon
+    prefab: {fileID: 7816341718952411648, guid: d23af5ea23a86ef4ca617f0376c53290, type: 3}
+    spawnChance: 50
+    spawnPointIndices: 00000000
+  - enemyName: WhiteBalloon
+    prefab: {fileID: 5142573760292370831, guid: 83229be06370b9641a6d683ff3f23201, type: 3}
+    spawnChance: 50
+    spawnPointIndices: 01000000
+  spawnInterval: 3
+  maxEnemies: 5

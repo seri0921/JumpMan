@@ -14,15 +14,17 @@ public class Player : MonoBehaviour
     [Header("アクション設定")]
     public float rotateSpeed = 200f;
     public float jumpForce = 10f;
-    public float knockbackForce = 8f;
 
     [SerializeField]
-    public float playerHP;
+    public int playerHP;
+    private int firstPlayerHP;
+
     private Rigidbody2D rb;
 
     private Vector3 startpos;
     void Start()
     {
+        firstPlayerHP = playerHP;
         rb = GetComponent<Rigidbody2D>();
         startpos = transform.position;
     }
@@ -39,7 +41,7 @@ public class Player : MonoBehaviour
         if (playerHP < 0)
         {
             Die();
-            playerHP += 2;
+            playerHP = firstPlayerHP;
         }
 
     }
@@ -98,23 +100,25 @@ public class Player : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            playerHP--;
-        }
-    }
+    // void OnTriggerEnter2D(Collider2D collision)
+    // {
+    //     if (collision.gameObject.CompareTag("Enemy"))
+    //     {
+    //         playerHP--;
+    //     }
+    // }
 
 
-    public void HandleSwordClash()
+    public void HandleSwordClash(float power)
     {
         // ( ... 剣の衝突処理は変更なし ... )
+        // rb.linearVelocity = Vector2.zero;
+        // Vector2 backwardDir = new Vector2(-1, -1)
+        // Vector2 knockbackDir = new Vector2(backwardDir.x, Mathf.Abs(backwardDir.y));
+        // if (knockbackDir.y < 0.1f) { knockbackDir.y = 0.1f; }
+        // rb.AddForce(knockbackDir.normalized * knockbackForce, ForceMode2D.Impulse);
         rb.linearVelocity = Vector2.zero;
-        Vector2 backwardDir = -transform.up;
-        Vector2 knockbackDir = new Vector2(backwardDir.x, Mathf.Abs(backwardDir.y));
-        if (knockbackDir.y < 0.1f) { knockbackDir.y = 0.1f; }
-        rb.AddForce(knockbackDir.normalized * knockbackForce, ForceMode2D.Impulse);
+        rb.AddForce(transform.up * power, ForceMode2D.Impulse);
     }
     public void StartSpinAttack()
     {

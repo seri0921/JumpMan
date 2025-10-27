@@ -106,9 +106,10 @@ MonoBehaviour:
   speed: 3
   rb: {fileID: 5543468074637842766}
   jumpForce: 2
-  knockbackPower: 10
+  knockbackForce: -7
   redBalloon: 0
   spawner: {fileID: 0}
+  enemyDestroyEffect: {fileID: 2618862030887645895, guid: 25c9f513c35de524fb39f84bfe787baa, type: 3}
 --- !u!58 &394835255349378763
 CircleCollider2D:
   m_ObjectHideFlags: 0
