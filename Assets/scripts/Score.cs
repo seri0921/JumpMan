@@ -12,7 +12,10 @@ public static class KillScore
     public static bool barrier;
 
 
-public static void Reset()
+    public static int LifeOrBullet = 10;
+    public static int Combo = 0;
+
+    public static void Reset()
     {
         killScore = 0;
         Level = 0;
@@ -20,6 +23,14 @@ public static void Reset()
         damageLevel = 1;
         jumpLevel = 1;
         barrier = false;
+
+        LifeOrBullet = 10;
+        Combo = 0;
+    }
+
+    public static void ComboReset()
+    {
+        Combo = 0;
     }
 
 

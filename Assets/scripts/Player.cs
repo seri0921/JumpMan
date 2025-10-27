@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using System.Collections; // コルーチンを使うために必要
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     private Vector3 startpos;
     void Start()
     {
+        KillScore.Reset();
         firstPlayerHP = playerHP;
         rb = GetComponent<Rigidbody2D>();
         startpos = transform.position;
@@ -31,6 +33,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        var gamepad = Gamepad.current;
+        if (gamepad == null) return;
+
         if (!isSpinning)
         {
             HandleRotation();
@@ -79,8 +84,10 @@ public class Player : MonoBehaviour
         switch (playerType)
         {
             case PlayerType.Player1:
-                if (Input.GetKey(KeyCode.A)) rotateInput = 1f;
-                else if (Input.GetKey(KeyCode.D)) rotateInput = -1f;
+                var gamepad = Gamepad.current;
+                if (gamepad == null) return;
+                if ( gamepad.leftShoulder.isPressed) rotateInput = 1f;
+                else if (gamepad.rightShoulder.isPressed) rotateInput = -1f;
                 break;
             case PlayerType.Player2:
                 if (Input.GetKey(KeyCode.LeftArrow)) rotateInput = 1f;
