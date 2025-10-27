@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
         {
             rb.linearVelocity = Vector2.zero;
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+
         }
 
     }
