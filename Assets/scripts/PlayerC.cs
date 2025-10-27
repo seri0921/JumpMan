@@ -8,7 +8,13 @@ public class CumulativeRotationTracker : MonoBehaviour
     [SerializeField]
     public float playerHP;
 
-    [Header("スティック入力")]
+    [SerializeField]
+    public int playerHP; //プレイヤーのHP
+    private int firstPlayerHP;
+    private Vector3 startpos;
+
+
+    
     [Range(0.1f, 0.9f)]
     [SerializeField] private float deadzone = 0.2f;
 
@@ -41,8 +47,15 @@ public class CumulativeRotationTracker : MonoBehaviour
 
     }
 
+    void Start()
+    {
+        firstPlayerHP = playerHP;
+        startpos = transform.position;
+    }
+
     void Update()
     {
+
         // �V�����ǉ�������ʒ[�̃��[�v�������Ăяo��
         HandleScreenWrap();
         Kakudo = KillScore.rotateLevel;
@@ -79,7 +92,7 @@ public class CumulativeRotationTracker : MonoBehaviour
             rb.rotation = (playerStartAngle + totalRotation) * Kakudo;
 
             // �f�o�b�O�\��
-           // Debug.Log($"���݂̊p�x: {currentAngle:F2}, ����: {deltaAngle:F2}, ��]���v: {totalRotation:F2}��");
+            // Debug.Log($"���݂̊p�x: {currentAngle:F2}, ����: {deltaAngle:F2}, ��]���v: {totalRotation:F2}��");
         }
         else
         {
@@ -87,8 +100,14 @@ public class CumulativeRotationTracker : MonoBehaviour
             if (isTracking)
             {
                 isTracking = false;
-           //     Debug.Log("--- �X�e�B�b�N�������ɖ߂�܂��� ---");
+                //     Debug.Log("--- �X�e�B�b�N�������ɖ߂�܂��� ---");
             }
+        }
+        
+        if (playerHP < 0)
+        {
+            Die();
+            playerHP = firstPlayerHP;
         }
     }
 
@@ -139,14 +158,23 @@ public class CumulativeRotationTracker : MonoBehaviour
     //}
 
     // プレイヤーノックバック処理
-    public void HandleSwordClash()
+    public void HandleSwordClash(float power)
     {
         // ( ... 剣の衝突処理は変更なし ... )
+        // rb.linearVelocity = Vector2.zero;
+        // Vector2 backwardDir = new Vector2(-1, -1)
+        // Vector2 knockbackDir = new Vector2(backwardDir.x, Mathf.Abs(backwardDir.y));
+        // if (knockbackDir.y < 0.1f) { knockbackDir.y = 0.1f; }
+        // rb.AddForce(knockbackDir.normalized * knockbackForce, ForceMode2D.Impulse);
         rb.linearVelocity = Vector2.zero;
-        Vector2 backwardDir = -transform.up;
-        Vector2 knockbackDir = new Vector2(backwardDir.x, Mathf.Abs(backwardDir.y));
-        if (knockbackDir.y < 0.1f) { knockbackDir.y = 0.1f; }
-        rb.AddForce(knockbackDir.normalized * knockbackForce, ForceMode2D.Impulse);
+        rb.AddForce(transform.up * power, ForceMode2D.Impulse);
+    }
+
+    public void Die()
+    {
+        Debug.Log(gameObject.name + " は倒された！");
+        // このゲームオブジェクトを非表示にする
+        gameObject.transform.position = startpos;
     }
 
 }

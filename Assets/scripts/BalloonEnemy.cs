@@ -12,14 +12,17 @@ public class BalloonEnemy : MonoBehaviour
     [SerializeField]
     private float jumpForce;
     [SerializeField]
-    private float knockbackPower;
+    private float knockbackForce;
     private SpriteRenderer sr;
 
     [SerializeField]
     private bool redBalloon; //赤風船かどうかフラグ
-    
+
     //エネミーマネージャースクリプト
-    public EnemyManager spawner;
+    public EnemyManagerTest spawner;
+
+    // エフェクト
+    public GameObject enemyDestroyEffect;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -77,6 +80,8 @@ public class BalloonEnemy : MonoBehaviour
             // 白風船の処理
             if (!redBalloon)
             {
+                GameManager.instance.player.HandleSwordClash(knockbackForce); // プレイヤーをノックバック
+                Instantiate(enemyDestroyEffect, transform.position, Quaternion.identity);
                 Destroy(gameObject, 0.05f);
                 spawner.EnemyDestroyed(); // エネミーの数を減らす
                 KillScore.killScore++; // スコアを加算
@@ -84,7 +89,8 @@ public class BalloonEnemy : MonoBehaviour
             }
             else
             {
-                GameManager.instance.player.HandleSwordClash(); // プレイヤーをノックバック
+                knockbackForce *= 2;
+                GameManager.instance.player.HandleSwordClash(knockbackForce); // プレイヤーをノックバック
                 redBalloon = false;
                 UpdateBalloonColor();
                 Debug.Log("a");
@@ -96,14 +102,15 @@ public class BalloonEnemy : MonoBehaviour
             // 白風船の処理
             if (!redBalloon)
             {
-                // GameManager.instance.player.playerHP--; // プレイヤーにダメージを与える
+                GameManager.instance.player.playerHP--; // プレイヤーにダメージを与える
+                GameManager.instance.player.HandleSwordClash(knockbackForce); // プレイヤーをノックバック
                 Destroy(gameObject, 0.05f);
                 spawner.EnemyDestroyed(); // エネミーの数を減らす
             }
             else
             {
-                //GameManager.instance.player.playerHP--;
-                GameManager.instance.player.HandleSwordClash(); // プレイヤーをノックバック
+                GameManager.instance.player.playerHP--;
+                GameManager.instance.player.HandleSwordClash(knockbackForce); // プレイヤーをノックバック
             }
 
         }

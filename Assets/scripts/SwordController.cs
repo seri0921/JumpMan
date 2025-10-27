@@ -1,45 +1,45 @@
 using UnityEngine;
 
-// Œ•‚É‚ÍCollider2D‚ª•K{
+// ï¿½ï¿½ï¿½É‚ï¿½Collider2Dï¿½ï¿½ï¿½Kï¿½{
 [RequireComponent(typeof(Collider2D))]
 public class SwordController : MonoBehaviour
 {
-    // ‚±‚ÌŒ•‚ÌŽ‚¿ŽåiƒvƒŒƒCƒ„[j
+    // ï¿½ï¿½ï¿½ÌŒï¿½ï¿½ÌŽï¿½ï¿½ï¿½ï¿½ï¿½iï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½j
     private Player owner;
 
     /*void Start()
     {
-        // Ž©•ª‚ÌeƒIƒuƒWƒFƒNƒg‚©‚çPlayerController‚Ìî•ñ‚ðŽæ“¾‚µ‚Ä•ÛŽ‚·‚é
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ìeï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½PlayerControllerï¿½Ìï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½Ä•ÛŽï¿½ï¿½ï¿½ï¿½ï¿½
         owner = GetComponentInParent<Player>();
         if (owner == null)
         {
-            Debug.LogError("Œ•‚Ìe‚ÉPlayerController‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
+            Debug.LogError("ï¿½ï¿½ï¿½Ìeï¿½ï¿½PlayerControllerï¿½ï¿½ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½I");
         }
     }
     */
     private void OnTriggerStay2D(Collider2D other)
     {
 
-        // ÚG‚µ‚½‘ŠŽè‚Ìƒ^ƒO‚ª "sword" ‚©‚Ç‚¤‚©‚ðƒ`ƒFƒbƒN
+        // ï¿½ÚGï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒ^ï¿½Oï¿½ï¿½ "sword" ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½Fï¿½bï¿½N
         if (other.CompareTag("sword"))
         {
-            // ‘ŠŽè‚©‚çSwordControllerƒRƒ“ƒ|[ƒlƒ“ƒg‚ðŽæ“¾
+            // ï¿½ï¿½ï¿½è‚©ï¿½ï¿½SwordControllerï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½æ“¾
             SwordController otherSword = other.GetComponent<SwordController>();
 
-            // ‘ŠŽè‚ª—LŒø‚ÈŒ•‚ÅA‚©‚ÂŽ‚¿Žå‚ªŽ©•ª‚Å‚Í‚È‚¢‚±‚Æ‚ðŠm”F
+            // ï¿½ï¿½ï¿½è‚ªï¿½Lï¿½ï¿½ï¿½ÈŒï¿½ï¿½ÅAï¿½ï¿½ï¿½ÂŽï¿½ï¿½ï¿½ï¿½å‚ªï¿½ï¿½ï¿½ï¿½ï¿½Å‚Í‚È‚ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½mï¿½F
             if (otherSword != null && otherSword.owner != this.owner)
             {
-                // Ž‚¿ŽåiƒvƒŒƒCƒ„[j‚ÉÕ“Ë‚ð’Ê’m‚·‚é
-                owner.HandleSwordClash();
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½jï¿½ÉÕ“Ë‚ï¿½Ê’mï¿½ï¿½ï¿½ï¿½
+                //owner.HandleSwordClash();
             }
-        }  // Œ•‚ÌƒRƒ‰ƒCƒ_[‚ª‘¼‚ÌƒgƒŠƒK[‚ÉG‚ê‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚é
-           // G‚ê‚½‘ŠŽè‚Ìƒ^ƒO‚ª "player" ‚©‚Ç‚¤‚©‚ðƒ`ƒFƒbƒN
+        }  // ï¿½ï¿½ï¿½ÌƒRï¿½ï¿½ï¿½Cï¿½_ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒgï¿½ï¿½ï¿½Kï¿½[ï¿½ÉGï¿½ê‚½ï¿½Æ‚ï¿½ï¿½ÉŒÄ‚Î‚ï¿½ï¿½
+           // ï¿½Gï¿½ê‚½ï¿½ï¿½ï¿½ï¿½Ìƒ^ï¿½Oï¿½ï¿½ "player" ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½Fï¿½bï¿½N
         if (other.CompareTag("Player"))
         {
-            // ”O‚Ì‚½‚ßAŽ©•ª‚ÌŽ‚¿Žå‚ðUŒ‚‚µ‚È‚¢‚æ‚¤‚Éƒ`ƒFƒbƒN‚·‚é
-            // ‘ŠŽè(other)‚Ìƒ‹[ƒgŠK‘w‚ÆAŽ©•ª(this)‚Ìƒ‹[ƒgŠK‘w‚ªˆá‚¤ê‡‚Ì‚ÝUŒ‚
+            // ï¿½Oï¿½Ì‚ï¿½ï¿½ßAï¿½ï¿½ï¿½ï¿½ï¿½ÌŽï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½æ‚¤ï¿½Éƒ`ï¿½Fï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½
+            // ï¿½ï¿½ï¿½ï¿½(other)ï¿½Ìƒï¿½ï¿½[ï¿½gï¿½Kï¿½wï¿½ÆAï¿½ï¿½ï¿½ï¿½(this)ï¿½Ìƒï¿½ï¿½[ï¿½gï¿½Kï¿½wï¿½ï¿½ï¿½á‚¤ï¿½ê‡ï¿½Ì‚ÝUï¿½ï¿½
             
-                // ‘ŠŽè‚ÌƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ðƒV[ƒ“‚©‚ç”j‰óiíœj‚·‚é
+                // ï¿½ï¿½ï¿½ï¿½ÌƒQï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½jï¿½ï¿½iï¿½íœï¿½jï¿½ï¿½ï¿½ï¿½
            // Destroy(other.gameObject);
             other.gameObject.GetComponent<Player>().Die();
             

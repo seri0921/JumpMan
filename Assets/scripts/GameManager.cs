@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
-    public Player player;
+    public CumulativeRotationTracker player;
  
      private void Awake()
      {
