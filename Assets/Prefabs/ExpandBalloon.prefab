@@ -165,12 +165,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ab8e20efac4c24d816fe6ba0ad1306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 0}
+  playerPos: {fileID: 0}
   speed: 0.5
   time: 0
   expandTime: 10
   expandRadius: 1000
   destroyDelay: 0.2
-  playerPos: {fileID: 0}
   sr: {fileID: 0}
   startInterval: 0.5
   endInterval: 0.05

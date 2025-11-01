@@ -86,13 +86,18 @@ public  class EnemyManagerTest : MonoBehaviour
         int randomIndex = Random.Range(0, indices.Length);
         Transform spawnPoint = spawnPoints[indices[randomIndex]];
 
-        //  敵を生成
+        // 敵を生成
         GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
-        BalloonEnemy script = enemy.GetComponent<BalloonEnemy>();
-        script.spawner = this;
-        script.playerPos = playerTransform;
 
-        currentEnemies++;
+        // 共通クラスを取得
+        EnemyBase script = enemy.GetComponent<EnemyBase>();
+        if (script != null)
+        {
+            script.spawner = this;
+            script.playerPos = playerTransform;
+        }
+
+        currentEnemies++; 
     }
 
     // 敵が死んだとき呼ばれる

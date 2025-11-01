@@ -965,7 +965,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1888095425}
   - {fileID: 1490423618}
-  level1Data: {fileID: 11400000, guid: e5bc5a5d52f9a904ebc9561a7704ee93, type: 2}
+  level1Data: {fileID: 11400000, guid: 82c9cfcd5586be74b818e0b800a94f2a, type: 2}
   level2Data: {fileID: 11400000, guid: e5a1dccbdf235604baf9f3ed8eedbdc0, type: 2}
   level3Data: {fileID: 0}
   level4Data: {fileID: 0}
@@ -8991,7 +8991,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmSound: {fileID: 0}
-  killSound: {fileID: 0}
+  seSound: {fileID: 0}
+  bgmClip: {fileID: 0}
+  attacSound: {fileID: 0}
   playerDamageSound: {fileID: 0}
   junpSound: {fileID: 0}
 --- !u!4 &1885194355
