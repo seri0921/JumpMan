@@ -120,10 +120,14 @@ public class PlayerC: MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            // SoundManager.instance.JunpSound();   // ジャンプ音
             cameraShake.ShakeCamera(CameraShake.ShakeType.Light);
             rb.linearVelocity = Vector2.zero;
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.PlayJumpSE();
+            }
         }
 
     }
