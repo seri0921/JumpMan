@@ -80,7 +80,7 @@ public class Bullet : MonoBehaviour
             newBullet.name = bullet.name;
             if (SoundManager.Instance != null)
             {
-                SoundManager.Instance.PlayAttackSE();
+                SoundManager.Instance.PlayAttackSE2();
             }
             Destroy(newBullet, 0.8f);
 
