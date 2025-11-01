@@ -9,6 +9,6 @@ public class TitleManager : MonoBehaviour
         ScoreManager.Instance.ResetCurrentScore();
 
         // ゲームシーンに遷移
-        SceneManager.LoadScene("testScene 1"); // "GameScene" は実際のゲームシーン名に置き換えてください
+        SceneManager.LoadScene("main"); // "GameScene" は実際のゲームシーン名に置き換えてください
     }
 }

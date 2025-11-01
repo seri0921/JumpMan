@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private Vector3 startpos;
     void Start()
     {
+        Time.timeScale = 0.8f;
         KillScore.Reset();
         firstPlayerHP = playerHP;
         rb = GetComponent<Rigidbody2D>();
@@ -43,11 +44,11 @@ public class Player : MonoBehaviour
         // 新しく追加した画面端のワープ処理を呼び出す
         HandleScreenWrap();
 
-        if (playerHP < 0)
-        {
-            Die();
-            playerHP = firstPlayerHP;
-        }
+        //if (LifeOrBullet < 0)
+        //{
+        //    Die();
+        //    playerHP = firstPlayerHP;
+        //}
 
     }
     private void HandleScreenWrap()

@@ -1046,7 +1046,7 @@ MonoBehaviour:
   firepoint: {fileID: 802463450}
   speed: 20
   AntiOn: 0
-  bulletForce: 6
+  bulletForce: 10
 --- !u!114 &164405803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10375,8 +10375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c5581c4c61e9943919154b87dedb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  largeRt: 180
-  smallRt: 30
 --- !u!1 &2014414694
 GameObject:
   m_ObjectHideFlags: 0
