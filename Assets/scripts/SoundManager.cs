@@ -13,6 +13,7 @@ public class SoundManager : MonoBehaviour
 
     [Header("SEのオーディオクリップ")]
     [SerializeField] AudioClip attacSound; // 攻撃音
+    [SerializeField] AudioClip attacSound2; // 攻撃音2
     [SerializeField] AudioClip playerDamageSound; // ダメージ音
     [SerializeField] AudioClip junpSound;  // ジャンプ音
 
@@ -49,6 +50,16 @@ public class SoundManager : MonoBehaviour
         if (seSound != null && attacSound != null)
         {
             seSound.PlayOneShot(attacSound);
+        }
+    }
+
+    public void PlayAttackSE2()
+    {
+        // seSourceで、attackClipを、PlayOneShotで再生
+        // PlayOneShotはSEが重なって再生される（連打しても音が鳴る）
+        if (seSound != null && attacSound2 != null)
+        {
+            seSound.PlayOneShot(attacSound2);
         }
     }
 

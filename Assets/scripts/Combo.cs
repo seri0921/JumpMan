@@ -33,7 +33,7 @@ public class Combo : MonoBehaviour
     public void ShowCombo(int currentCombo)
     {
         // コンボ数をセットして表示
-        comboText.SetText("{0}", currentCombo);
+        comboText.SetText("Combo:{0}", currentCombo);
         grCombo.alpha = 1f;
 
         isCombo = true;
@@ -42,7 +42,7 @@ public class Combo : MonoBehaviour
     // Set_Bulletから呼び出す関数 (コンボを非表示)
     public void HideCombo()
     {
-        comboText.SetText("0"); // テキストも0に戻す
+        comboText.SetText("Combo:{0}"); // テキストも0に戻す
         grCombo.alpha = 0f;
         isCombo = false;
     }
