@@ -1,0 +1,52 @@
+using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+
+public class HighScore : MonoBehaviour
+{
+    public GameObject fScore;
+    public GameObject sScore;
+    public GameObject tScore;
+    public GameObject grade;
+
+    private int score = 0;
+    private TMP_Text firstScore;
+    private TMP_Text secondScore;
+    private TMP_Text thirdScore;
+    private TMP_Text yourScore;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        firstScore = fScore.GetComponent<TMP_Text>();
+        secondScore = sScore.GetComponent<TMP_Text>();
+        thirdScore = tScore.GetComponent<TMP_Text>();
+        yourScore = grade.GetComponent<TMP_Text>();
+
+        score = KillScore.Combo * 200 + KillScore.timeScore * 10;
+        if (KillScore.first < score)
+        {
+            KillScore.third = KillScore.second;
+            KillScore.second = KillScore.first;
+            KillScore.first = score;
+        }
+        else if (KillScore.second < score)
+        {
+            KillScore.third = KillScore.second;
+            KillScore.second = score;
+        }
+        else if (KillScore.third < score)
+        {
+            KillScore.third = score;
+        }
+
+    }
+
+    // Update is called once per frame
+    void Update(){
+        yourScore.text = string.Format("{0:000000}", score);
+        firstScore.text = "First: " + KillScore.first.ToString();
+        secondScore.text = "Second: " + KillScore.second.ToString();
+        thirdScore.text = "Third: " + KillScore.third.ToString();
+    }
+}
