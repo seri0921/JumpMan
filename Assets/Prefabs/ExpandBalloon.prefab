@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
   playerPos: {fileID: 0}
-  speed: 0.5
+  speed: 1
   time: 0
   expandTime: 10
   expandRadius: 1000

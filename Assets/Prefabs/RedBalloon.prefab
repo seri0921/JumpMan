@@ -102,13 +102,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c53d2c67c5ea2c34cb4a233d40b2d1af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 0}
   playerPos: {fileID: 0}
-  speed: 3
+  speed: 5
   rb: {fileID: 6783747667269923826}
   jumpForce: 2
   knockbackForce: -7
   redBalloon: 1
-  spawner: {fileID: 0}
   enemyDestroyEffect: {fileID: 2618862030887645895, guid: 25c9f513c35de524fb39f84bfe787baa, type: 3}
 --- !u!58 &553371173643376542
 CircleCollider2D:
