@@ -7,45 +7,44 @@ public class Combo : MonoBehaviour
     [SerializeField] CanvasGroup grCombo;
     [SerializeField] TextMeshProUGUI comboText;
 
-    private int combo;  // コンボ数
-
-    private float elapsedTime; // 経過時間
-
-    private float displayTime = 1.0f; // コンボ数を表示する時間
-
     private bool isCombo; // コンボ数が表示されたか
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static Combo Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
-
+        // 最初は非表示にしておく
+        grCombo.alpha = 0f;
+        isCombo = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // コンボ数が表示されたら計測開始
-        if (isCombo == true)
-        {
-            elapsedTime += Time.deltaTime;
-            // 一定時間経過したら
-            if (elapsedTime >= displayTime);
-            {
-                // コンボ数を非表示
-                grCombo.alpha = 0f;
-                isCombo = false;
-            }
-        }
 
-    }
-
-    public void ShowCombo()
+    public void ShowCombo(int currentCombo)
     {
         // コンボ数をセットして表示
-        comboText.SetText("{0}", combo);
+        comboText.SetText("{0}", currentCombo);
         grCombo.alpha = 1f;
-        elapsedTime = 0;  // 経過時間
-        isCombo = true;   // 計測開始
+
+        isCombo = true;
+    }
+
+    // Set_Bulletから呼び出す関数 (コンボを非表示)
+    public void HideCombo()
+    {
+        comboText.SetText("0"); // テキストも0に戻す
+        grCombo.alpha = 0f;
+        isCombo = false;
     }
 
 }
