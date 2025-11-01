@@ -54,6 +54,11 @@ public class Bullet : MonoBehaviour
             {
                 bulletScript.common = true;
             }
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.PlayAttackSE();
+            }
+
             Destroy(newBullet, 0.8f);
 
         }
@@ -73,6 +78,10 @@ public class Bullet : MonoBehaviour
             GameObject newBullet = Instantiate(bullet, bulletPosi, bulletRot);
             newBullet.GetComponent<Rigidbody2D>().AddForce(direction * speed, ForceMode2D.Impulse);
             newBullet.name = bullet.name;
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.PlayAttackSE();
+            }
             Destroy(newBullet, 0.8f);
 
             AntiOn = false;
