@@ -1,10 +1,8 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BalloonEnemy : MonoBehaviour
+public class BalloonEnemy : EnemyBase
 {
-    [SerializeField]
-    public Transform playerPos;
     [SerializeField]
     private float speed;
     [SerializeField]
@@ -17,9 +15,6 @@ public class BalloonEnemy : MonoBehaviour
 
     [SerializeField]
     private bool redBalloon; //赤風船かどうかフラグ
-
-    //エネミーマネージャースクリプト
-    public EnemyManagerTest spawner;
 
     // エフェクト
     public GameObject enemyDestroyEffect;
@@ -40,64 +35,40 @@ public class BalloonEnemy : MonoBehaviour
 
     // 風船の色を変化させる関数
     void UpdateBalloonColor()
-{
-    if (sr != null)
-        {
-        // 赤風船なら赤に白風船なら白に変化
-        sr.color = redBalloon ? Color.red : Color.white;
-    }
-}
-    private void OnTriggerStay2D(Collider2D other)
     {
-        // if (other.CompareTag("Player"))
-        // {
-        //     //プレイヤーにダメージを与える
-        //     other.gameObject.GetComponent<Player>().playerHP--;
-        //     //プレイヤーにダメージを与えたらノックバック、それ以外は死亡
-        //     if (other.gameObject.GetComponent<Player>().playerHP > 0)
-        //     {
-        //         Debug.Log(other.gameObject.GetComponent<Player>().playerHP);
-
-        //         Rigidbody2D playerRb = other.GetComponent<Rigidbody2D>();
-        //         // 自分（このオブジェクト）から相手への方向ベクトルを計算
-        //         Vector2 direction = (other.transform.position - transform.position).normalized;
-        //         // その方向にノックバックする
-        //         playerRb.AddForce(direction * knockbackPower, ForceMode2D.Impulse);
-
-        //     }
-        //     else
-        //     {
-        //         other.gameObject.GetComponent<Player>().Die();
-        //         Destroy(gameObject);
-        //     }
-
-        // }
+        if (sr != null)
+        {
+            // 赤風船なら赤に白風船なら白に変化
+            sr.color = redBalloon ? Color.red : Color.white;
+        }
     }
+    
+    public void HandleHitBySword()
+    {
+        if (!redBalloon)
+        {
+            // 白風船の処理
+            Instantiate(enemyDestroyEffect, transform.position, Quaternion.identity);
+            Destroy(gameObject, 0.05f);
+            spawner.EnemyDestroyed();
+            KillScore.killScore++;
+        }
+        else
+        {
+            // 赤風船の処理
+            knockbackForce *= 2;
+            redBalloon = false;
+            UpdateBalloonColor();
+        }
+    }
+
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("sword"))
         {
-            print("敵に触れる");
-            // 白風船の処理
-            if (!redBalloon)
-            {
-                print("敵に処理開始");
-               // GameManager.instance.player.HandleSwordClash(knockbackForce); // プレイヤーをノックバック
-                Instantiate(enemyDestroyEffect, transform.position, Quaternion.identity);
-                Destroy(gameObject, 0.05f);
-                spawner.EnemyDestroyed(); // エネミーの数を減らす
-                KillScore.killScore++; // スコアを加算
-                Debug.Log("b");
-            }
-            else
-            {
-                print("敵に処理開始");
-                knockbackForce *= 2;
-             // GameManager.instance.player.HandleSwordClash(knockbackForce); // プレイヤーをノックバック
-                redBalloon = false;
-                UpdateBalloonColor();
-                Debug.Log("a");
-            }
+            HandleHitBySword();
+
         }
 
         if (collision.gameObject.CompareTag("Player"))
