@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Set_Bullet : MonoBehaviour
 {
@@ -9,6 +10,14 @@ public class Set_Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            if (common == false)
+            {
+                if (Time.timeScale == 1.0f) 
+                {
+                    StartCoroutine(HitStopCoroutine(0.2f));
+                }
+            }
+
             KillScore.Combo++;
 
             if (Combo.Instance != null)
@@ -34,5 +43,12 @@ public class Set_Bullet : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator HitStopCoroutine(float duration)
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1f;
     }
 }
