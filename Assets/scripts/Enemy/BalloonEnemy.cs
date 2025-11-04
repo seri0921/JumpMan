@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 
 public class BalloonEnemy : EnemyBase
@@ -16,8 +17,14 @@ public class BalloonEnemy : EnemyBase
     [SerializeField]
     private bool redBalloon; //赤風船かどうかフラグ
 
+    private bool isMuteki = false; // 無敵状態かどうか
+    [SerializeField]
+    private float mutekiTime = 0.2f;
+
     // エフェクト
     public GameObject enemyDestroyEffect;
+
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,6 +52,11 @@ public class BalloonEnemy : EnemyBase
     
     public void HandleHitBySword()
     {
+        if (isMuteki)
+        {
+            return;
+        }
+
         if (!redBalloon)
         {
             // 白風船の処理
@@ -59,10 +71,20 @@ public class BalloonEnemy : EnemyBase
             knockbackForce *= 2;
             redBalloon = false;
             UpdateBalloonColor();
+
+            StartCoroutine(MutekiCoroutine());
         }
     }
 
-    
+    private IEnumerator MutekiCoroutine()
+    {
+        isMuteki = true; // 無敵にする
+
+        yield return new WaitForSeconds(mutekiTime); // まつ
+
+        isMuteki = false; // 無敵解除
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("sword"))
