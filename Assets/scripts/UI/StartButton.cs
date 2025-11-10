@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ContinueButton : MonoBehaviour
+public class StartButton : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,6 +15,6 @@ public class ContinueButton : MonoBehaviour
     // Update is called once per frame
     void onClick()
     {
-        SceneManager.LoadScene("TestTitleScene");
+        SceneManager.LoadScene("Main");
     }
 }

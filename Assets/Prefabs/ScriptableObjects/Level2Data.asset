@@ -16,10 +16,10 @@ MonoBehaviour:
   - enemyName: RedBalloon
     prefab: {fileID: 7816341718952411648, guid: d23af5ea23a86ef4ca617f0376c53290, type: 3}
     spawnChance: 50
-    spawnPointIndices: 00000000
+    spawnPointIndices: 0000000001000000
   - enemyName: WhiteBalloon
     prefab: {fileID: 5142573760292370831, guid: 83229be06370b9641a6d683ff3f23201, type: 3}
     spawnChance: 50
-    spawnPointIndices: 01000000
-  spawnInterval: 3
+    spawnPointIndices: 0000000001000000
+  spawnInterval: 7
   maxEnemies: 5
