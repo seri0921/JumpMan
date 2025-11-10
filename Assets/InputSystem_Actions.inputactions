@@ -7,24 +7,128 @@
             "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
             "actions": [
                 {
-                    "name": "LStick",
-                    "type": "Value",
-                    "id": "19220397-5330-43bd-9e69-b71217ead35a",
-                    "expectedControlType": "Vector2",
+                    "name": "Lturn",
+                    "type": "Button",
+                    "id": "b38f7028-6e54-4118-ad61-4722ef0b66df",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Rturn",
+                    "type": "Button",
+                    "id": "85fa4786-426c-4015-86e7-86c1ece1fcbc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "normalAt",
+                    "type": "Button",
+                    "id": "b250654e-10a6-46ac-b2e5-3bb147f2e534",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "spAt",
+                    "type": "Button",
+                    "id": "a059dc54-6888-4954-85a3-bc330aeb8b51",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "7d4f625d-1bdb-43d3-a507-f7e4fb894f94",
-                    "path": "<XInputController>/leftStick",
+                    "id": "baf9f381-cce9-4c8a-af49-2d87eb31526f",
+                    "path": "<XInputController>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "LStick",
+                    "action": "Lturn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fbdd2991-bf67-420e-9198-ab8192e16cdd",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Lturn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a8c1503-e120-421b-b129-0dc4aaaebcdb",
+                    "path": "<XInputController>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Rturn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c8961e50-8603-43aa-9e00-9c259d865794",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Rturn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "552ee82a-18b4-4c20-bb01-362d070c2979",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "normalAt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e67891b4-f37a-4390-9746-c31ded3bd8f5",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "normalAt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4dbd1920-f35b-436a-938b-dd0391e754a0",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "spAt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b410d009-a94e-478d-9e8e-615960e74977",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "spAt",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
