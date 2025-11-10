@@ -145,7 +145,7 @@ public class PlayerKeybord : MonoBehaviour
 
     /// <summary>
     /// プレイヤー本体のコライダーが他のトリガーに触れたときに呼ばれる
-    /// </summary>]
+    /// </summary>
     private IEnumerator SpinCoroutine()
     {
         // 1. スピン開始の準備

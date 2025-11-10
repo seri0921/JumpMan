@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HighScore : MonoBehaviour
 {
@@ -50,9 +51,14 @@ public class HighScore : MonoBehaviour
     void Update(){
         yourScore.text = string.Format("{0:000000}", score);
         itemScore.text = "Combo " + KillScore.Combo + "Å~ 200 = " + KillScore.Combo*200;
-        itemScore.text += "\nTime " + KillScore.timeScore + "Å~ 10 = " + KillScore.timeScore * 200;
+        itemScore.text += "\nTime " + KillScore.timeScore + "Å~ 10 = " + KillScore.timeScore * 10;
         firstScore.text = "First: " + KillScore.first.ToString();
         secondScore.text = "Second: " + KillScore.second.ToString();
         thirdScore.text = "Third: " + KillScore.third.ToString();
+    }
+
+    public void OnGoToTitleButton()
+    {
+        SceneManager.LoadScene("TestTitleScene"); // "TitleScene" ÇÕé¿ç€ÇÃÉ^ÉCÉgÉãÉVÅ[ÉìñºÇ…
     }
 }
