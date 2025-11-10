@@ -21,6 +21,9 @@ public class ExpandBalloon : EnemyBase
     [SerializeField] private float startInterval = 0.5f; // 最初の点滅間隔
     [SerializeField] private float endInterval = 0.05f;  // 最終の点滅間隔
 
+    // エフェクト
+    public GameObject enemyEfekut;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -55,6 +58,8 @@ public class ExpandBalloon : EnemyBase
                     balloon.HandleHitBySword(); 
                 }
             }
+            Instantiate(enemyEfekut, transform.position, Quaternion.identity);
+            SoundManager.Instance.EnemyDamage();
             Destroy(gameObject, destroyDelay);
         }
     }

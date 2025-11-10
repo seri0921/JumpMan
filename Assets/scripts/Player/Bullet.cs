@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Bullet : MonoBehaviour
 {
@@ -60,11 +62,7 @@ public class Bullet : MonoBehaviour
             {
                 bulletScript.common = true;
             }
-            if (SoundManager.Instance != null)
-            {
-                SoundManager.Instance.PlayAttackSE();
-            }
-
+            SoundManager.Instance.PlayAttackSE();
             Destroy(newBullet, 0.8f);
 
         }
@@ -84,13 +82,24 @@ public class Bullet : MonoBehaviour
             GameObject newBullet = Instantiate(bullet, bulletPosi, bulletRot);
             newBullet.GetComponent<Rigidbody2D>().AddForce(direction * speed, ForceMode2D.Impulse);
             newBullet.name = bullet.name;
-            if (SoundManager.Instance != null)
-            {
-                SoundManager.Instance.PlayAttackSE2();
-            }
+            SoundManager.Instance.PlayAttackSE2();
             Destroy(newBullet, 0.8f);
 
             AntiOn = false;
+        }
+
+        if (KillScore.LifeOrBullet <= 0)
+        {
+            StartCoroutine(Count());
+        }
+    }
+
+    private IEnumerator Count()
+    {
+        yield return new WaitForSeconds(1.0f);
+        if (KillScore.LifeOrBullet <=  0)
+        {
+            SceneManager.LoadScene("TestResultScene");
         }
 
     }

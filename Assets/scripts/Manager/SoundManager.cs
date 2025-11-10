@@ -46,40 +46,24 @@ public class SoundManager : MonoBehaviour
     // 攻撃音を再生する関数
     public void PlayAttackSE()
     {
-        // seSourceで、attackClipを、PlayOneShotで再生
-        // PlayOneShotはSEが重なって再生される（連打しても音が鳴る）
-        if (seSound != null && attacSound != null)
-        {
-            seSound.PlayOneShot(attacSound);
-        }
+        seSound.PlayOneShot(attacSound);
     }
 
     public void PlayAttackSE2()
     {
-        // seSourceで、attackClipを、PlayOneShotで再生
-        // PlayOneShotはSEが重なって再生される（連打しても音が鳴る）
-        if (seSound != null && attacSound2 != null)
-        {
-            seSound.PlayOneShot(attacSound2);
-        }
+        seSound.PlayOneShot(attacSound2);
     }
 
     // ダメージ音を再生する関数
     public void PlayDamageSE()
     {
-        if (seSound != null && playerDamageSound != null)
-        {
-            seSound.PlayOneShot(playerDamageSound);
-        }
+        seSound.PlayOneShot(playerDamageSound);
     }
 
     // ジャンプ音を再生する関数
     public void PlayJumpSE()
     {
-        if (seSound != null && junpSound != null)
-        {
-            seSound.PlayOneShot(junpSound);
-        }
+        seSound.PlayOneShot(junpSound);
     }
 
     public void EnemyDamage()
