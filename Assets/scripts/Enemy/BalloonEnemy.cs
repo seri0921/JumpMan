@@ -61,6 +61,7 @@ public class BalloonEnemy : EnemyBase
         {
             // 白風船の処理
             Instantiate(enemyDestroyEffect, transform.position, Quaternion.identity);
+            SoundManager.Instance.EnemyDamage();
             Destroy(gameObject, 0.05f);
             spawner.EnemyDestroyed();
             KillScore.killScore++;
