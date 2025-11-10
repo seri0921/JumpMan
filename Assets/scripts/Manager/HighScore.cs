@@ -8,12 +8,14 @@ public class HighScore : MonoBehaviour
     public GameObject sScore;
     public GameObject tScore;
     public GameObject grade;
+    public GameObject item;
 
     private int score = 0;
     private TMP_Text firstScore;
     private TMP_Text secondScore;
     private TMP_Text thirdScore;
     private TMP_Text yourScore;
+    private TMP_Text itemScore;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,8 +24,10 @@ public class HighScore : MonoBehaviour
         secondScore = sScore.GetComponent<TMP_Text>();
         thirdScore = tScore.GetComponent<TMP_Text>();
         yourScore = grade.GetComponent<TMP_Text>();
+        itemScore = item.GetComponent<TMP_Text>();
 
-        score = KillScore.Combo * 200 + KillScore.timeScore * 10;
+        score += KillScore.Combo * 200;
+        score += +KillScore.timeScore * 10;
         if (KillScore.first < score)
         {
             KillScore.third = KillScore.second;
@@ -45,6 +49,8 @@ public class HighScore : MonoBehaviour
     // Update is called once per frame
     void Update(){
         yourScore.text = string.Format("{0:000000}", score);
+        itemScore.text = "Combo " + KillScore.Combo + "~ 200 = " + KillScore.Combo*200;
+        itemScore.text += "\nTime " + KillScore.timeScore + "~ 10 = " + KillScore.timeScore * 200;
         firstScore.text = "First: " + KillScore.first.ToString();
         secondScore.text = "Second: " + KillScore.second.ToString();
         thirdScore.text = "Third: " + KillScore.third.ToString();

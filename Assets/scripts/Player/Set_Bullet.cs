@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class Set_Bullet : MonoBehaviour
 {
     public bool common = false;
+    private bool  isHit = false;
 
     private void Update()
     {
@@ -37,7 +38,10 @@ public class Set_Bullet : MonoBehaviour
             if (common)
             {
                 Destroy(gameObject);
-                KillScore.LifeOrBullet++;
+                if (isHit == false) {
+                    KillScore.LifeOrBullet++;
+                    isHit = true;
+                }
             }
         }
         else if (collision.gameObject.CompareTag("Ground"))
