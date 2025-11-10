@@ -23,7 +23,7 @@ MonoBehaviour:
     spawnPointIndices: 0000000001000000
   - enemyName: ExpandBalloon
     prefab: {fileID: 8782789274060709182, guid: d3f479da11d41fa46a65b597b64b07a7, type: 3}
-    spawnChance: 2
+    spawnChance: 20
     spawnPointIndices: 0000000001000000
   spawnInterval: 3
   maxEnemies: 5
