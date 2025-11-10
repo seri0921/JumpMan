@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea95edf64e8620d449c3239f6fe5b88c, type: 3}
   m_Name: Level3
   m_EditorClassIdentifier: 
-  enemyList: []
+  enemyList:
+  - enemyName: WhiteBalloon
+    prefab: {fileID: 5142573760292370831, guid: 83229be06370b9641a6d683ff3f23201, type: 3}
+    spawnChance: 40
+    spawnPointIndices: 0000000001000000
+  - enemyName: RedBalloon
+    prefab: {fileID: 7816341718952411648, guid: d23af5ea23a86ef4ca617f0376c53290, type: 3}
+    spawnChance: 40
+    spawnPointIndices: 0000000001000000
+  - enemyName: ExpandBalloon
+    prefab: {fileID: 8782789274060709182, guid: d3f479da11d41fa46a65b597b64b07a7, type: 3}
+    spawnChance: 2
+    spawnPointIndices: 0000000001000000
   spawnInterval: 3
   maxEnemies: 5

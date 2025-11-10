@@ -105,7 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
   playerPos: {fileID: 0}
-  speed: 5
+  speed: 3
   rb: {fileID: 6783747667269923826}
   refrectForce: 10
   knockbackForce: -7

@@ -13,7 +13,7 @@ public static class KillScore
     public static int killScore = 0;
     public static float timeScore = 0;
     public static int highScore = 0;
-    public static int LifeOrBullet = 10;
+    public static int LifeOrBullet = 10;   // ƒvƒŒƒCƒ„[HP
     public static int Combo = 0;
 
     public static int ComboScore = 0;

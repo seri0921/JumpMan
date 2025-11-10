@@ -17,5 +17,5 @@ MonoBehaviour:
     prefab: {fileID: 5142573760292370831, guid: 83229be06370b9641a6d683ff3f23201, type: 3}
     spawnChance: 100
     spawnPointIndices: 0000000001000000
-  spawnInterval: 10
-  maxEnemies: 4
+  spawnInterval: 7
+  maxEnemies: 10

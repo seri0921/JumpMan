@@ -1036,7 +1036,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164405794}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1d280fd2f91a6744a3d76ccc8e5d812, type: 3}
   m_Name: 
@@ -3591,7 +3591,7 @@ Transform:
   m_GameObject: {fileID: 485065211}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.107368, y: -1.8285, z: 0.1269923}
+  m_LocalPosition: {x: 28, y: -1.72, z: 0.1269923}
   m_LocalScale: {x: 5.1259527, y: 7.5286455, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3689,8 +3689,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6603,7 +6603,7 @@ Transform:
   m_GameObject: {fileID: 1078957796}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.492633, y: -1.8011, z: 0.1269923}
+  m_LocalPosition: {x: -18.47, y: -2.07, z: 0.1269923}
   m_LocalScale: {x: 7.3355703, y: 7.044279, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7075,7 +7075,7 @@ MonoBehaviour:
   - {fileID: 133651213}
   level1Data: {fileID: 11400000, guid: e5bc5a5d52f9a904ebc9561a7704ee93, type: 2}
   level2Data: {fileID: 11400000, guid: e5a1dccbdf235604baf9f3ed8eedbdc0, type: 2}
-  level3Data: {fileID: 0}
+  level3Data: {fileID: 11400000, guid: 0180fa528d66ab540897b2d0da46e7c1, type: 2}
   level4Data: {fileID: 0}
 --- !u!4 &1212536610
 Transform:
