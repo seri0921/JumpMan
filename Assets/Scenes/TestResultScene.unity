@@ -560,6 +560,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f1ab63969b346340b074e2f7c7c3be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CurrentScore>k__BackingField: 0
+  rankingData:
+    scores: []
+  savePath: 
 --- !u!4 &380980034
 Transform:
   m_ObjectHideFlags: 0
@@ -1420,8 +1424,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1674564673}
-        m_TargetAssemblyTypeName: ResultManager, Assembly-CSharp
+      - m_Target: {fileID: 380980035}
+        m_TargetAssemblyTypeName: HighScore, Assembly-CSharp
         m_MethodName: OnGoToTitleButton
         m_Mode: 1
         m_Arguments:
@@ -2119,7 +2123,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674564671}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c130cc628d7e7a04bb6ca662141b465a, type: 3}
   m_Name: 

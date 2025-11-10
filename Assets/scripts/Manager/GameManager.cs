@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             Debug.Log("スコアが加算された");
-            ScoreManager.Instance.AddCurrentScore(100);
+            //ScoreManager.Instance.AddCurrentScore(100);
         }
         
     }
