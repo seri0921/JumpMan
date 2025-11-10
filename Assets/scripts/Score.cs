@@ -11,7 +11,7 @@ public static class KillScore
     public static bool barrier;
 
     public static int killScore = 0;
-    public static int timeScore = 0;
+    public static float timeScore = 0;
     public static int highScore = 0;
     public static int LifeOrBullet = 10;
     public static int Combo = 0;

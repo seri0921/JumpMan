@@ -42,6 +42,8 @@ public class PlayerC : MonoBehaviour
 
     void Update()
     {
+        KillScore.timeScore += Time.deltaTime;
+
         if (!isSpinning)
         {
             HandleRotation();
