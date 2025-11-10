@@ -33,9 +33,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        var gamepad = Gamepad.current;
-        if (gamepad == null) return;
-
         if (!isSpinning)
         {
             HandleRotation();
