@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public  class EnemyManagerTest : MonoBehaviour
 {
     [Header("=== レベル管理 ===")]
     private float time;
     [SerializeField] private float levelupTime = 30f;
+    [SerializeField] private float limitTime = 90f;
     private int currentLevel = 1;
 
     [Header("=== プレイヤー ===")]
@@ -38,6 +40,11 @@ public  class EnemyManagerTest : MonoBehaviour
             currentLevel++;
             SetLevel(currentLevel);
             time = 0;
+        }
+
+        if (time >= limitTime)
+        {
+            SceneManager.LoadScene("TestResultScene");
         }
 
         //  敵生成処理
