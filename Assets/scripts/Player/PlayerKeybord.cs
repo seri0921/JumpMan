@@ -4,10 +4,9 @@ using System.Collections; // コルーチンを使うために必要
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public class Player : MonoBehaviour
+public class PlayerKeybord : MonoBehaviour
 {
-
-    private bool isSpinning = false; // スピン中かどうかを管理するフラグ
+        private bool isSpinning = false; // スピン中かどうかを管理するフラグ
     // ( ... enumや変数の宣言は変更なし ... )
     public enum PlayerType { Player1, Player2 }
     [Header("プレイヤー設定")]
@@ -34,7 +33,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         var gamepad = Gamepad.current;
-        if (gamepad == null) return;
 
         if (!isSpinning)
         {
@@ -84,10 +82,12 @@ public class Player : MonoBehaviour
         switch (playerType)
         {
             case PlayerType.Player1:
-                var gamepad = Gamepad.current;
+                /* var gamepad = Gamepad.current;
 
-                if (gamepad.leftShoulder.isPressed) rotateInput = 1f;
-                else if (gamepad.rightShoulder.isPressed) rotateInput = -1f;
+                if (gamepad.leftShoulder.isPressed || Input.GetKey(KeyCode.D)) rotateInput = 1f;
+                else if (gamepad.rightShoulder.isPressed || Input.GetKey(KeyCode.A)) rotateInput = -1f;*/
+                if (Input.GetKey(KeyCode.D)) rotateInput = -1f;
+                else if (Input.GetKey(KeyCode.A)) rotateInput = 1f;
                 break;
             case PlayerType.Player2:
                 if (Input.GetKey(KeyCode.LeftArrow)) rotateInput = 1f;
