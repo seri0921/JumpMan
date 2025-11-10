@@ -64,18 +64,18 @@ public class PlayerC : MonoBehaviour
         Vector3 newPosition = transform.position;
 
         // x座標が12より大きくなったら
-        if (newPosition.x > 9f)
+        if (newPosition.x > 11f)
         {
             // x座標を-12にする
-            newPosition.x = -9f;
+            newPosition.x = -11f;
         }
         // x座標が-12より小さくなったら
-        else if (newPosition.x < -9f)
+        else if (newPosition.x < -11f)
         {
             // x座標を12にする
-            newPosition.x = 9f;
+            newPosition.x = 11f;
         }
-        // x座標が12より大きくなったら
+        // y座標が-6より大きくなったら
         if (newPosition.y < -6f)
         {
             // x座標を-12にする
