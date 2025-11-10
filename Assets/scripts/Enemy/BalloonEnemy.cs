@@ -105,14 +105,22 @@ public class BalloonEnemy : EnemyBase
             if (!redBalloon)
             {
                 KillScore.LifeOrBullet--;
-
+                KillScore.ComboReset();
+                if (Combo.Instance != null)
+                {
+                    Combo.Instance.HideCombo();
+                }
                 Destroy(gameObject, 0.05f);
                 spawner.EnemyDestroyed(); // エネミーの数を減らす
             }
             else
             {
                 KillScore.LifeOrBullet--;
-                
+                KillScore.ComboReset();
+                if (Combo.Instance != null)
+                {
+                    Combo.Instance.HideCombo();
+                }
                 Vector2 dir = (transform.position - collision.gameObject.transform.position).normalized;
                 rb.AddForce(dir * refrectForce, ForceMode2D.Impulse);
                 StartCoroutine(StopAfterDelay());

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class Set_Bullet : MonoBehaviour
 {
     public bool common = false;
+    private bool StopCombo = false;
     private bool  isHit = false;
 
     private void Update()
@@ -28,33 +29,49 @@ public class Set_Bullet : MonoBehaviour
             //    }
             //}
 
-            KillScore.Combo++;
-
-            if (Combo.Instance != null)
-            {
-                Combo.Instance.ShowCombo(KillScore.Combo);
-            }
 
             if (common)
             {
-                Destroy(gameObject);
-                if (isHit == false) {
+                if (StopCombo == false)
+                {
+                    KillScore.Combo++;
+                    KillScore.ComboScore += KillScore.Combo * 10;
+                    if (Combo.Instance != null)
+                    {
+                        Combo.Instance.ShowCombo(KillScore.Combo);
+                    }
+                    StopCombo = true;
+                }
+
+                if (isHit == false)
+                {
                     KillScore.LifeOrBullet++;
                     isHit = true;
                 }
+                Destroy(gameObject);
+            }
+            else
+            {
+                KillScore.Combo++;
+                KillScore.ComboScore += KillScore.Combo * 10;
+                if (Combo.Instance != null)
+                {
+                    Combo.Instance.ShowCombo(KillScore.Combo);
+                }
+
             }
         }
         else if (collision.gameObject.CompareTag("Ground"))
         {
-            if (common) 
-            {
+            //if (common) 
+            //{
                 KillScore.ComboReset();
 
                 if (Combo.Instance != null)
                 {
                     Combo.Instance.HideCombo();
                 }
-            }
+            //}
         }
     }
 

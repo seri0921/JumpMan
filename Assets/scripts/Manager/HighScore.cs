@@ -27,7 +27,7 @@ public class HighScore : MonoBehaviour
         yourScore = grade.GetComponent<TMP_Text>();
         itemScore = item.GetComponent<TMP_Text>();
 
-        score += KillScore.Combo * 200;
+        score += KillScore.ComboScore;
         score += +KillScore.timeScore * 10;
         if (KillScore.first < score)
         {
@@ -50,7 +50,7 @@ public class HighScore : MonoBehaviour
     // Update is called once per frame
     void Update(){
         yourScore.text = string.Format("{0:000000}", score);
-        itemScore.text = "Combo " + KillScore.Combo + "~ 200 = " + KillScore.Combo*200;
+        itemScore.text = "MaxCombo " + KillScore.MaxCombo + " ComboScore " + KillScore.ComboScore;
         itemScore.text += "\nTime " + KillScore.timeScore + "~ 10 = " + KillScore.timeScore * 10;
         firstScore.text = "First: " + KillScore.first.ToString();
         secondScore.text = "Second: " + KillScore.second.ToString();
