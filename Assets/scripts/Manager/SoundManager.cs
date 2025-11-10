@@ -16,6 +16,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip attacSound2; // 攻撃音2
     [SerializeField] AudioClip playerDamageSound; // ダメージ音
     [SerializeField] AudioClip junpSound;  // ジャンプ音
+    [SerializeField] AudioClip enemyDamage; // 敵を倒した時
 
     public static SoundManager Instance { get; private set; } // シングルトンインスタンス
 
@@ -79,5 +80,11 @@ public class SoundManager : MonoBehaviour
         {
             seSound.PlayOneShot(junpSound);
         }
+    }
+
+    public void EnemyDamage()
+    {
+
+        seSound.PlayOneShot(enemyDamage);
     }
 }
