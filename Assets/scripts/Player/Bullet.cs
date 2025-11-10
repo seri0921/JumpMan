@@ -12,10 +12,13 @@ public class Bullet : MonoBehaviour
     [SerializeField] private bool AntiOn = true;
     [SerializeField] private float bulletForce = 2f;
 
+    private PlayerInput playerInput;
+    private InputAction normalAttack;
+    private InputAction spAttack;
+
     // Start is called before the first frame update
     void Start()
     {
-
         rb = GetComponent<Rigidbody2D>();
         if (bullet == null)
         {
@@ -25,6 +28,10 @@ public class Bullet : MonoBehaviour
         {
             Debug.LogError("Firepoint ���ݒ肳��Ă��܂���B");
         }
+
+        playerInput = GetComponent<PlayerInput>();
+        normalAttack = playerInput.actions["normalAt"];
+        spAttack = playerInput.actions["spAt"];
     }
 
     // Update is called once per frame
@@ -33,8 +40,7 @@ public class Bullet : MonoBehaviour
 
         Debug.Log($"Combo: {KillScore.LifeOrBullet}");
 
-        var gamepad = Gamepad.current;
-        if (gamepad.aButton.wasPressedThisFrame)
+        if (normalAttack.WasPerformedThisFrame())
         {
             KillScore.LifeOrBullet --;
             Transform firepointTransform = firepoint.transform;
@@ -62,7 +68,7 @@ public class Bullet : MonoBehaviour
             Destroy(newBullet, 0.8f);
 
         }
-        if (gamepad.bButton.wasPressedThisFrame)
+        if (spAttack.WasPerformedThisFrame())
         {
             KillScore.LifeOrBullet --;
             AntiOn = true;

@@ -1,146 +1,139 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections; // コルーチンを使うために必要
 
-public class PlayerC: MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
+public class PlayerC : MonoBehaviour
 {
-    public CameraShake cameraShake;
-
-    //ダメージを受けて
-    [SerializeField]
-    public int playerHP; //プレイヤーのHP
-    private int firstPlayerHP;
-    private Vector3 startpos;
-    
-    [Range(0.1f, 0.9f)]
-    [SerializeField] private float deadzone = 0.2f;
-
-    [Header("合計角度")]
-    [SerializeField] private float totalRotation = 0f;   
-
-    [Header("ジャンプ力")]
-    private float Kakudo;
+    private bool isSpinning = false; // スピン中かどうかを管理するフラグ
+    // ( ... enumや変数の宣言は変更なし ... )
+    public enum PlayerType { Player1, Player2 }
+    [Header("プレイヤー設定")]
+    public PlayerType playerType = PlayerType.Player1;
+    [Header("アクション設定")]
+    public float rotateSpeed = 200f;
     public float jumpForce = 10f;
 
-    private PlayerInput playerInput;
-    private InputAction lStickAction;
+    [SerializeField]
+    public int playerHP;
+    private int firstPlayerHP;
     private Rigidbody2D rb;
+    private Vector3 startpos;
 
-    private bool isTracking = false; 
-    private float startAngle = 0f;
-    private float playerStartAngle = 0f;
-
-    public float knockbackForce = 8f;
-
-
-
-    void Awake()
-    {
-        KillScore.Reset();
-        rb = GetComponent<Rigidbody2D>();
-        playerInput = GetComponent<PlayerInput>();
-        lStickAction = playerInput.actions["LStick"];
-        Kakudo = KillScore.rotateLevel;
-
-    }
+    private PlayerInput playerInput;
+    private InputAction rightTurn;
+    private InputAction leftTurn;
+    private InputAction normalAttack;
+    private InputAction spAttack;
 
     void Start()
     {
+        Time.timeScale = 0.8f;
+        KillScore.Reset();
         firstPlayerHP = playerHP;
+        rb = GetComponent<Rigidbody2D>();
         startpos = transform.position;
+
+        playerInput = GetComponent<PlayerInput>();
+        rightTurn = playerInput.actions["Rturn"];
+        leftTurn = playerInput.actions["Lturn"];
     }
 
     void Update()
     {
+        var gamepad = Gamepad.current;
+        if (gamepad == null) return;
+
+        if (!isSpinning)
+        {
+            HandleRotation();
+        }
+        // 新しく追加した画面端のワープ処理を呼び出す
         HandleScreenWrap();
-        Kakudo = KillScore.rotateLevel;
 
-        Vector2 stickInput = lStickAction.ReadValue<Vector2>();
+        //if (LifeOrBullet < 0)
+        //{
+        //    Die();
+        //    playerHP = firstPlayerHP;
+        //}
 
-        if (stickInput.magnitude > deadzone)
-        {
-            float currentAngle = Mathf.Atan2(stickInput.y, stickInput.x) * Mathf.Rad2Deg;
-
-            if (!isTracking)
-            {
-                isTracking = true;
-
-                playerStartAngle = rb.rotation; 
-                startAngle = currentAngle;
-
-                totalRotation = 0f;
-            }
-
-            float deltaAngle = Mathf.DeltaAngle(startAngle, currentAngle);
-
-            totalRotation += deltaAngle;
-
-            startAngle = currentAngle;
-
-
-            rb.rotation = (playerStartAngle + totalRotation) * Kakudo;
-
-        }
-        else
-        {
-            if (isTracking)
-            {
-                isTracking = false;
-            }
-        }
-        
-        if (playerHP < 0)
-        {
-            Die();
-            playerHP = firstPlayerHP;
-        }
     }
-
-
     private void HandleScreenWrap()
     {
+        // 現在の位置情報を取得
         Vector3 newPosition = transform.position;
 
+        // x座標が12より大きくなったら
         if (newPosition.x > 9f)
         {
+            // x座標を-12にする
             newPosition.x = -9f;
         }
-
+        // x座標が-12より小さくなったら
         else if (newPosition.x < -9f)
         {
+            // x座標を12にする
             newPosition.x = 9f;
         }
+        // x座標が12より大きくなったら
         if (newPosition.y < -6f)
         {
+            // x座標を-12にする
             newPosition.y = 5f;
         }
 
+        // 計算後の新しい位置をオブジェクトに適用
         transform.position = newPosition;
     }
+    private void HandleRotation()
+    {
+        // ( ... 回転処理は変更なし ... )
+        float rotateInput = 0f;
+        switch (playerType)
+        {
+            case PlayerType.Player1:
+                if (leftTurn.IsPressed())
+                {
+                    rotateInput = 1f;
+                }
+                else if (rightTurn.IsPressed())
+                {
+                    rotateInput = -1f;
+                }
+                break;
+            case PlayerType.Player2:
+                if (Input.GetKey(KeyCode.LeftArrow)) rotateInput = 1f;
+                else if (Input.GetKey(KeyCode.RightArrow)) rotateInput = -1f;
+                break;
+        }
+        transform.Rotate(0, 0, rotateInput * rotateSpeed * Time.deltaTime);
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            cameraShake.ShakeCamera(CameraShake.ShakeType.Light);
             rb.linearVelocity = Vector2.zero;
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-
             if (SoundManager.Instance != null)
             {
                 SoundManager.Instance.PlayJumpSE();
             }
+
         }
 
     }
 
-    //public void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if(collision.gameObject.CompareTag("Enemy"))
-    //    {
-    //        playerHP--;
-    //    }
-    //}
+    // void OnTriggerEnter2D(Collider2D collision)
+    // {
+    //     if (collision.gameObject.CompareTag("Enemy"))
+    //     {
+    //         playerHP--;
+    //     }
+    // }
 
-    // プレイヤーノックバック処理
+
     public void HandleSwordClash(float power)
     {
         // ( ... 剣の衝突処理は変更なし ... )
@@ -152,15 +145,57 @@ public class PlayerC: MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(transform.up * power, ForceMode2D.Impulse);
     }
+    public void StartSpinAttack()
+    {
+        // すでにスピン中でなければ、新しいスピンを開始する
+        if (!isSpinning)
+        {
+            StartCoroutine(SpinCoroutine());
+        }
+    }
 
+    // --- ここからが新しい追加部分 ---
+
+    /// <summary>
+    /// プレイヤー本体のコライダーが他のトリガーに触れたときに呼ばれる
+    /// </summary>]
+    private IEnumerator SpinCoroutine()
+    {
+        // 1. スピン開始の準備
+        isSpinning = true; // スピン状態フラグをオンにする
+        float duration = 0.3f; // 回転にかかる時間
+        float elapsed = 0f; // 経過時間
+        float spinSpeed = 360f / duration; // 1秒あたりの回転速度
+
+        // 2. 回転処理のループ
+        while (elapsed < duration)
+        {
+            int muki = 0;
+            if (playerType == PlayerType.Player1) muki = -1;
+            else muki = 1;
+            // 1フレーム分の回転量を計算し、Z軸周りに回転させる
+            transform.Rotate(0, 0, spinSpeed * Time.deltaTime * muki);
+
+            // 経過時間を更新
+            elapsed += Time.deltaTime;
+
+            // 1フレーム待つ
+            yield return null;
+        }
+
+        // 3. スピン終了処理
+        isSpinning = false; // スピン状態フラグをオフに戻す
+    }
+
+
+    /// <summary>
+    /// 死亡したときの処理
+    /// </summary>
     public void Die()
     {
-        cameraShake.ShakeCamera(CameraShake.ShakeType.Heavy);
         Debug.Log(gameObject.name + " は倒された！");
         // このゲームオブジェクトを非表示にする
         gameObject.transform.position = startpos;
-        // SoundManager.instance.PlayerDamageSound();
     }
-
+    // --- 追加部分ここまで ---
 }
-
