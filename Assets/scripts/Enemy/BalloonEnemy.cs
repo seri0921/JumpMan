@@ -112,21 +112,22 @@ public class BalloonEnemy : EnemyBase
             else
             {
                 KillScore.LifeOrBullet--;
-
+                
+                Vector2 dir = (transform.position - collision.gameObject.transform.position).normalized;
+                rb.AddForce(dir * refrectForce, ForceMode2D.Impulse);
+                StartCoroutine(StopAfterDelay());
             }
 
         }
-
-        
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            // 敵同士が触れたら反射する
             Vector2 dir = (transform.position - collision.gameObject.transform.position).normalized;
             rb.AddForce(dir * refrectForce, ForceMode2D.Impulse);
             StartCoroutine(StopAfterDelay());
-        }
-        
+        }      
     }
 }
