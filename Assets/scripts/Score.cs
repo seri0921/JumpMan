@@ -16,6 +16,8 @@ public static class KillScore
     public static int LifeOrBullet = 10;
     public static int Combo = 0;
 
+    public static int ComboScore = 0;
+    public static int MaxCombo = 0;
     public static int first = 0;
     public static int second = 0;
     public static int third = 0;
@@ -32,10 +34,15 @@ public static class KillScore
         timeScore = 0;
         LifeOrBullet = 10;
         Combo = 0;
+        ComboScore = 0;
+        MaxCombo = 0;
     }
 
     public static void ComboReset()
     {
+        if (MaxCombo < Combo) {
+            MaxCombo = Combo;
+        }
         Combo = 0;
     }
 
