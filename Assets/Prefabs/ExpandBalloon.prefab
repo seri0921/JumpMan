@@ -175,3 +175,4 @@ MonoBehaviour:
   sr: {fileID: 0}
   startInterval: 0.5
   endInterval: 0.05
+  enemyEfekut: {fileID: 2618862030887645895, guid: 25c9f513c35de524fb39f84bfe787baa, type: 3}
