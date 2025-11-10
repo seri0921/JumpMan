@@ -19,11 +19,11 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         if (bullet == null)
         {
-            Debug.LogError("Bullet ƒvƒŒƒnƒu‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+            Debug.LogError("Bullet ï¿½vï¿½ï¿½ï¿½nï¿½uï¿½ï¿½ï¿½İ’è‚³ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B");
         }
         if (firepoint == null)
         {
-            Debug.LogError("Firepoint ‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+            Debug.LogError("Firepoint ï¿½ï¿½ï¿½İ’è‚³ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B");
         }
     }
 

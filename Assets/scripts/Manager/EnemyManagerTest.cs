@@ -91,11 +91,10 @@ public  class EnemyManagerTest : MonoBehaviour
 
         // 共通クラスを取得
         EnemyBase script = enemy.GetComponent<EnemyBase>();
-        if (script != null)
-        {
-            script.spawner = this;
-            script.playerPos = playerTransform;
-        }
+        
+        script.spawner = this;
+        script.playerPos = playerTransform;
+        
 
         currentEnemies++; 
     }

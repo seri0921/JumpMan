@@ -9,7 +9,7 @@ public class BalloonEnemy : EnemyBase
     [SerializeField]
     private Rigidbody2D rb;
     [SerializeField]
-    private float jumpForce;
+    private float refrectForce;
     [SerializeField]
     private float knockbackForce;
     private SpriteRenderer sr;
@@ -85,6 +85,12 @@ public class BalloonEnemy : EnemyBase
         isMuteki = false; // 無敵解除
     }
 
+    private IEnumerator StopAfterDelay()
+    {
+        yield return new WaitForSeconds(1.0f); // 0.3秒後に発動
+        rb.linearVelocity = Vector2.zero;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("sword"))
@@ -110,13 +116,17 @@ public class BalloonEnemy : EnemyBase
             }
 
         }
+
+        
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            rb.linearVelocity = Vector2.zero;
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            Vector2 dir = (transform.position - collision.gameObject.transform.position).normalized;
+            rb.AddForce(dir * refrectForce, ForceMode2D.Impulse);
+            StartCoroutine(StopAfterDelay());
         }
+        
     }
 }
