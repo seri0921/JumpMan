@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Net.NetworkInformation;
 
 public class Bullet : MonoBehaviour
 {
@@ -15,25 +16,27 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float bulletForce = 2f;
 
     private PlayerInput playerInput;
+
     private InputAction normalAttack;
     private InputAction spAttack;
+
+    [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private Transform firePoint;        // —\‘ªü‚ÌˆÊ’u
+    [SerializeField] private float maxDistance = 100f;   // —\‘ªü‚ÌÅ‘å‚Ì’·‚³
+    [SerializeField] private LayerMask layerMask;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        if (bullet == null)
-        {
-            Debug.LogError("Bullet ï¿½vï¿½ï¿½ï¿½nï¿½uï¿½ï¿½ï¿½İ’è‚³ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B");
-        }
-        if (firepoint == null)
-        {
-            Debug.LogError("Firepoint ï¿½ï¿½ï¿½İ’è‚³ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B");
-        }
 
         playerInput = GetComponent<PlayerInput>();
+
         normalAttack = playerInput.actions["normalAt"];
         spAttack = playerInput.actions["spAt"];
+
+        lineRenderer.enabled = false;  // Å‰‚Í—\‘ªüƒIƒt
+
     }
 
     // Update is called once per frame
@@ -42,9 +45,41 @@ public class Bullet : MonoBehaviour
 
         Debug.Log($"Combo: {KillScore.LifeOrBullet}");
 
-        if (normalAttack.WasPerformedThisFrame())
+        if (normalAttack.IsPressed()) // ’Êí’e‚Å‰Ÿ‚³‚ê‚Ä‚¢‚éŠÔ
         {
-            KillScore.LifeOrBullet --;
+            lineRenderer.enabled = true;
+
+            RaycastHit2D hit = Physics2D.Raycast(firePoint.position, firePoint.up, maxDistance, layerMask);
+            lineRenderer.SetPosition(0, firePoint.position);
+
+            if (hit.collider != null)
+            {
+                lineRenderer.SetPosition(1, hit.point);   // ƒGƒlƒ~[‚É“–‚½‚Á‚½‚çŠÑ’Ê‚³‚¹‚È‚¢
+            }
+            else
+            {
+                Vector2 endPosition = (Vector2)firePoint.position + (Vector2)firePoint.up * maxDistance;  // —\‘ªü‚ÌÅ‘å‚Ì’·‚³‚Ü‚Å
+                lineRenderer.SetPosition(1, endPosition);
+            }
+        }
+        else if (spAttack.IsPressed()) // ŠÑ’Ê’e‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éŠÔ
+        {
+            lineRenderer.enabled = true;
+
+            RaycastHit2D hit = Physics2D.Raycast(firePoint.position, firePoint.up, maxDistance, layerMask);
+            lineRenderer.SetPosition(0, firePoint.position);
+            Vector2 endPosition = (Vector2)firePoint.position + (Vector2)firePoint.up * maxDistance;  // —\‘ªü‚ÌÅ‘å‚Ì’·‚³‚Ü‚Å
+            lineRenderer.SetPosition(1, endPosition);
+        }
+        else
+        {
+            lineRenderer.enabled = false;   // —\‘ªüƒIƒt
+        }
+
+
+        if (normalAttack.WasReleasedThisFrame()) // ƒ{ƒ^ƒ“‚ª—£‚³‚ê‚½‚Æ‚«
+        {
+            KillScore.LifeOrBullet--;
             Transform firepointTransform = firepoint.transform;
             Vector2 bulletPosi = firepointTransform.position;
             Vector2 direction = firepointTransform.up;
@@ -66,7 +101,7 @@ public class Bullet : MonoBehaviour
             Destroy(newBullet, 0.8f);
 
         }
-        if (spAttack.WasPerformedThisFrame())
+        if (spAttack.WasReleasedThisFrame())  // ƒ{ƒ^ƒ“‚ª—£‚³‚ê‚½‚Æ‚«
         {
             KillScore.LifeOrBullet --;
             AntiOn = true;
