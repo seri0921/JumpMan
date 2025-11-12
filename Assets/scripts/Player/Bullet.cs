@@ -24,6 +24,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Transform firePoint;        // 予測線の位置
     [SerializeField] private float maxDistance = 100f;   // 予測線の最大の長さ
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private Color lineStartColor = new Color(1f, 1f, 1f, 1f); // 始点の色 (デフォルトは白の不透明)
+    [SerializeField] private Color lineEndColor = new Color(1f, 1f, 1f, 0f);   // 終点の色 (デフォルトは白の透明)
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,8 @@ public class Bullet : MonoBehaviour
         spAttack = playerInput.actions["spAt"];
 
         lineRenderer.enabled = false;  // 最初は予測線オフ
+        lineRenderer.startColor = lineStartColor;
+        lineRenderer.endColor = lineEndColor;
 
     }
 
@@ -98,7 +102,7 @@ public class Bullet : MonoBehaviour
                 bulletScript.common = true;
             }
             SoundManager.Instance.PlayAttackSE();
-            Destroy(newBullet, 0.8f);
+            Destroy(newBullet, 1.5f);
 
         }
         if (spAttack.WasReleasedThisFrame())  // ボタンが離されたとき
@@ -118,7 +122,7 @@ public class Bullet : MonoBehaviour
             newBullet.GetComponent<Rigidbody2D>().AddForce(direction * speed, ForceMode2D.Impulse);
             newBullet.name = bullet.name;
             SoundManager.Instance.PlayAttackSE2();
-            Destroy(newBullet, 0.8f);
+            Destroy(newBullet, 1.5f);
 
             AntiOn = false;
         }
