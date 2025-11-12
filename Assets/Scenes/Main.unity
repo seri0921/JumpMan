@@ -1100,10 +1100,12 @@ MonoBehaviour:
   bulletForce: 10
   lineRenderer: {fileID: 164405806}
   firePoint: {fileID: 1107860834}
-  maxDistance: 100
+  maxDistance: 5
   layerMask:
     serializedVersion: 2
     m_Bits: 128
+  lineStartColor: {r: 1, g: 1, b: 1, a: 1}
+  lineEndColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!114 &164405804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1181,7 +1183,7 @@ LineRenderer:
   m_SortingOrder: 1
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -1190,13 +1192,22 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.28421152
+        value: 0.14988077
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -0.16636875
+        outSlope: -0.16636875
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.20932758
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
