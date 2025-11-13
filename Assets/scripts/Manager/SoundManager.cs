@@ -55,7 +55,7 @@ public class SoundManager : MonoBehaviour
     }
 
     // ƒ_ƒ[ƒW‰¹‚ğÄ¶‚·‚éŠÖ”
-    public void PlayDamageSE()
+    public void PlayerDamageSE()
     {
         seSound.PlayOneShot(playerDamageSound);
     }

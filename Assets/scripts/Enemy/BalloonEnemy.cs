@@ -111,6 +111,7 @@ public class BalloonEnemy : EnemyBase
                 {
                     Combo.Instance.HideCombo();
                 }
+                SoundManager.Instance.PlayerDamageSE();
                 Destroy(gameObject, 0.05f);
                 spawner.EnemyDestroyed(); // エネミーの数を減らす
             }
