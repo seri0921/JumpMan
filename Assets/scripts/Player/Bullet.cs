@@ -46,9 +46,6 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        Debug.Log($"Combo: {KillScore.LifeOrBullet}");
-
         if (normalAttack.IsPressed()) // ’Êí’e‚Å‰Ÿ‚³‚ê‚Ä‚¢‚éŠÔ
         {
             lineRenderer.enabled = true;

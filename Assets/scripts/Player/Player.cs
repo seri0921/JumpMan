@@ -45,7 +45,6 @@ public class Player : MonoBehaviour
             Die();
             playerHP = firstPlayerHP;
         }
-
     }
     private void HandleScreenWrap()
     {
