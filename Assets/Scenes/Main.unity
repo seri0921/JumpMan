@@ -5405,6 +5405,10 @@ PrefabInstance:
       propertyPath: enemyDamage
       value: 
       objectReference: {fileID: 8300000, guid: 9196932c683609047b9df2da4d6d2d9d, type: 3}
+    - target: {fileID: 5301107734082187518, guid: d09afc9222d3c9a449708996b72b4f5a, type: 3}
+      propertyPath: rareEnemySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4cf6ce379d212d0429e4d4a281077cf2, type: 3}
     - target: {fileID: 7563207262781174162, guid: d09afc9222d3c9a449708996b72b4f5a, type: 3}
       propertyPath: m_Volume
       value: 0

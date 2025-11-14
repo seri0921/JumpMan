@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class HighScore : MonoBehaviour
 {
@@ -59,10 +58,5 @@ public class HighScore : MonoBehaviour
         firstScore.text = "First: " + KillScore.first.ToString();
         secondScore.text = "Second: " + KillScore.second.ToString();
         thirdScore.text = "Third: " + KillScore.third.ToString();
-    }
-
-    public void OnGoToTitleButton()
-    {
-        SceneManager.LoadScene("TestTitleScene"); // "TitleScene" は実際のタイトルシーン名に
     }
 }

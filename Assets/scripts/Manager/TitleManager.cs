@@ -12,14 +12,14 @@ public class TitleManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         normalAttack = playerInput.actions["normalAt"];
     }
-    public void OnGameStartButton()
+    public void OnGameReStartButton()
     {
         // ゲーム開始時に現在のスコアを0にリセット
         //ScoreManager.Instance.ResetCurrentScore();
         if (normalAttack.WasPerformedThisFrame())
         {
             // ゲームシーンに遷移
-            SceneManager.LoadScene("main"); // "GameScene" は実際のゲームシーン名に置き換えてください
+            SceneManager.LoadScene("TestTitleScene"); // "GameScene" は実際のゲームシーン名に置き換えてください
         }
     }
 }
