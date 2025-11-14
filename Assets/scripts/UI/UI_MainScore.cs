@@ -6,6 +6,7 @@ public class UI_MainScore : MonoBehaviour
 {
     public GameObject scoreText;
     private TMP_Text Text;
+    private int time;
     void Start()
     {
         Text = scoreText.GetComponent<TMP_Text>();
@@ -14,6 +15,7 @@ public class UI_MainScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Text.text = string.Format("{0:000000}", KillScore.ComboScore);
+        time = (int)KillScore.timeScore;
+        Text.text = string.Format("{0:000000}", KillScore.ComboScore+time*10);
     }
 }
