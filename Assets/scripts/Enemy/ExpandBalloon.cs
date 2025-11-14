@@ -59,6 +59,9 @@ public class ExpandBalloon : EnemyBase
                 }
             }
             Instantiate(enemyEfekut, transform.position, Quaternion.identity);
+            int DieText = KillScore.Combo * 10;
+            ShowScorePopup(DieText.ToString());
+
             SoundManager.Instance.EnemyDamage();
             Destroy(gameObject, destroyDelay);
         }
