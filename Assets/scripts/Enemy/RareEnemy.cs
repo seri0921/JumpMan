@@ -8,8 +8,6 @@ public class RareEnemy : EnemyBase
     [SerializeField] private float verticalRange = 2f;     // 上下に揺れる「幅」（中心からの最大距離）
     [SerializeField] private float verticalSpeed = 1.5f;   // 揺れる速さ（ノイズの周波数）
     [SerializeField] private int returnNum = 3; //往復回数
-    [SerializeField] private GameObject effect;
-    [SerializeField] private Transform canvas;
 
     private float startY;            // 揺れの中心となるY座標
     private float perlinOffset;      // 各個体で揺れ方を変えるためのオフセット
@@ -20,7 +18,6 @@ public class RareEnemy : EnemyBase
     private int returnCount = 0;        // 往復（方向転換）した回数
     private bool isReturning = true;    // 往復動作中か？
     private bool isHit = false; //二重実行防止bool
-    private Camera mainCamera;
     void Start()
     {
         startY = transform.position.y;
@@ -98,15 +95,13 @@ public class RareEnemy : EnemyBase
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("sword"))
+        if (collision.gameObject.CompareTag("sword")& !isHit)
         {
             isHit = true;
             KillScore.ComboScore += 200;
             SoundManager.Instance.RareEnemy();
-            GameObject newEffect = Instantiate(effect, canvas);
-            Vector3 screenPos = mainCamera.WorldToScreenPoint(transform.position);
-            newEffect.GetComponent<RectTransform>().position = screenPos;
-
+            int DieText = 200 + KillScore.Combo * 10;
+            ShowScorePopup(DieText.ToString());
             if (spawner != null)
             {
                 spawner.EnemyDestroyed(); 

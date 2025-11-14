@@ -10,7 +10,7 @@ public class RareEnemyDied : MonoBehaviour
     private TextMeshProUGUI textMesh;
     private Color startColor;
 
-    void Start()
+    void Awake()
     {
         textMesh = GetComponent<TextMeshProUGUI>();
         if (textMesh == null)
@@ -19,9 +19,22 @@ public class RareEnemyDied : MonoBehaviour
             Destroy(gameObject); // ÉGÉâÅ[éûÇÕë¶ç¿Ç…è¡ñ≈
             return;
         }
+    }
+
+    private void Start()
+    {
         startColor = textMesh.color;
         StartCoroutine(AnimatePopup());
     }
+
+    public void SetText(string textToShow)
+    {
+        if (textMesh != null)
+        {
+            textMesh.text = textToShow;
+        }
+    }
+
     private IEnumerator AnimatePopup()
     {
         float elapsedTime = 0f;

@@ -7347,6 +7347,8 @@ MonoBehaviour:
   levelupTime: 30
   limitTime: 90
   playerTransform: {fileID: 2008514253}
+  DieTextPrefab: {fileID: 5175782000314521013, guid: ef1b2c71a5fb005469276c33780be3f7, type: 3}
+  uiCanvasTransform: {fileID: 187931983}
   spawnPoints:
   - {fileID: 1751965150}
   - {fileID: 133651213}

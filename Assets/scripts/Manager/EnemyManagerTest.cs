@@ -12,6 +12,8 @@ public  class EnemyManagerTest : MonoBehaviour
     [Header("=== プレイヤー ===")]
     [SerializeField] private Transform playerTransform;
 
+    [SerializeField] private GameObject DieTextPrefab; // 敵に渡す「演出プレハブ」
+    [SerializeField] private Transform uiCanvasTransform;      // 敵に渡す「CanvasのTransform」
     [Header("=== 敵生成管理 ===")]
     private float spawnTimer;                         //  生成間隔
     private int currentEnemies = 0;                   //  現在の敵数
@@ -101,7 +103,8 @@ public  class EnemyManagerTest : MonoBehaviour
         
         script.spawner = this;
         script.playerPos = playerTransform;
-        
+        script.DieText = DieTextPrefab;
+        script.uiCanvas = uiCanvasTransform;
 
         currentEnemies++; 
     }
