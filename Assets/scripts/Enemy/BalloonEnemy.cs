@@ -123,6 +123,7 @@ public class BalloonEnemy : EnemyBase
                 {
                     Combo.Instance.HideCombo();
                 }
+                SoundManager.Instance.PlayerDamageSE();
                 Vector2 dir = (transform.position - collision.gameObject.transform.position).normalized;
                 rb.AddForce(dir * refrectForce, ForceMode2D.Impulse);
                 StartCoroutine(StopAfterDelay());

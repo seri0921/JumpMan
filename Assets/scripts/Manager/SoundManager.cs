@@ -17,6 +17,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip playerDamageSound; // ダメージ音
     [SerializeField] AudioClip junpSound;  // ジャンプ音
     [SerializeField] AudioClip enemyDamage; // 敵を倒した時
+    [SerializeField] AudioClip rareEnemySound; // レアの敵倒した時
 
     public static SoundManager Instance { get; private set; } // シングルトンインスタンス
 
@@ -43,7 +44,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // 攻撃音を再生する関数
+    // 攻撃音を再生する
     public void PlayAttackSE()
     {
         seSound.PlayOneShot(attacSound);
@@ -54,21 +55,29 @@ public class SoundManager : MonoBehaviour
         seSound.PlayOneShot(attacSound2);
     }
 
-    // ダメージ音を再生する関数
+    
+    // プレイヤーがダメージを受けた再生する
     public void PlayerDamageSE()
     {
         seSound.PlayOneShot(playerDamageSound);
     }
 
-    // ジャンプ音を再生する関数
+    // ジャンプ音を再生する
     public void PlayJumpSE()
     {
         seSound.PlayOneShot(junpSound);
     }
 
+    // 適倒した時
     public void EnemyDamage()
     {
 
         seSound.PlayOneShot(enemyDamage);
+    }
+
+    // レアの敵倒した時
+    public void RareEnemy()
+    {
+        seSound.PlayOneShot(rareEnemySound);
     }
 }

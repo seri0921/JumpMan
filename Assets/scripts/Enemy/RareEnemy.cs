@@ -102,7 +102,7 @@ public class RareEnemy : EnemyBase
         {
             isHit = true;
             KillScore.ComboScore += 200;
-            SoundManager.Instance.EnemyDamage();
+            SoundManager.Instance.RareEnemy();
             GameObject newEffect = Instantiate(effect, canvas);
             Vector3 screenPos = mainCamera.WorldToScreenPoint(transform.position);
             newEffect.GetComponent<RectTransform>().position = screenPos;
