@@ -6,7 +6,7 @@ public  class EnemyManagerTest : MonoBehaviour
     [Header("=== レベル管理 ===")]
     private float time;
     [SerializeField] private float levelupTime = 30f;
-    [SerializeField] private float limitTime = 90f;
+    [SerializeField] private float limitTime = 120f;
     private int currentLevel = 1;
 
     [Header("=== プレイヤー ===")]
