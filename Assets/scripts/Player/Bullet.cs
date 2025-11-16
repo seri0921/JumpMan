@@ -135,7 +135,7 @@ public class Bullet : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         if (KillScore.LifeOrBullet <=  0)
         {
-            SceneManager.LoadScene("TestResultScene");
+            SceneManager.LoadScene("ResultScene");
         }
 
     }

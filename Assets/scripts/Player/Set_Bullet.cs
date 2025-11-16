@@ -12,7 +12,7 @@ public class Set_Bullet : MonoBehaviour
     {
         if (KillScore.LifeOrBullet < 0)
         {
-            SceneManager.LoadScene("TestResultScene");
+            SceneManager.LoadScene("ResultScene");
         }
     }
 
