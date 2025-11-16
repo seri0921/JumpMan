@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            SceneManager.LoadScene("TestResultScene");
+            SceneManager.LoadScene("ResultScene");
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
