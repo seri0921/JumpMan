@@ -24,13 +24,15 @@ public class BalloonEnemy : EnemyBase
     // エフェクト
     public GameObject enemyDestroyEffect;
 
-    
+    private CameraShake cameraShake;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         UpdateBalloonColor();
+
+        cameraShake = FindObjectOfType<CameraShake>();
     }
 
     // Update is called once per frame
@@ -83,7 +85,7 @@ public class BalloonEnemy : EnemyBase
     {
         isMuteki = true; // 無敵にする
 
-        yield return new WaitForSeconds(mutekiTime); // まつ
+        yield return new WaitForSeconds(0.1f); // まつ
 
         isMuteki = false; // 無敵解除
     }
@@ -104,6 +106,8 @@ public class BalloonEnemy : EnemyBase
 
         if (collision.gameObject.CompareTag("Player"))
         {
+            cameraShake.ShakeCamera(CameraShake.ShakeType.Medium);
+
             // 白風船の処理
             if (!redBalloon)
             {
@@ -120,6 +124,7 @@ public class BalloonEnemy : EnemyBase
             else
             {
                 KillScore.LifeOrBullet--;
+
                 KillScore.ComboReset();
                 if (Combo.Instance != null)
                 {
@@ -130,7 +135,6 @@ public class BalloonEnemy : EnemyBase
                 rb.AddForce(dir * refrectForce, ForceMode2D.Impulse);
                 StartCoroutine(StopAfterDelay());
             }
-
         }
     }
     void OnCollisionEnter2D(Collision2D collision)
