@@ -13,7 +13,7 @@ public static class KillScore
     public static int killScore = 0;
     public static float timeScore = 0;
     public static int highScore = 0;
-    public static int LifeOrBullet = 10;   // プレイヤーHP
+    public static int LifeOrBullet = 7;   // プレイヤーHP
     public static int Combo = 0;
 
     public static int ComboScore = 0;
@@ -32,7 +32,7 @@ public static class KillScore
 
         killScore = 0;
         timeScore = 0;
-        LifeOrBullet = 10;
+        LifeOrBullet = 7;
         Combo = 0;
         ComboScore = 0;
         MaxCombo = 0;
