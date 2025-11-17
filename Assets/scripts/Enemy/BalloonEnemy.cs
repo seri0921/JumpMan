@@ -13,6 +13,7 @@ public class BalloonEnemy : EnemyBase
     [SerializeField]
     private float knockbackForce;
     private SpriteRenderer sr;
+    public GameObject ko;
 
     [SerializeField]
     private bool redBalloon; //赤風船かどうかフラグ
@@ -49,6 +50,7 @@ public class BalloonEnemy : EnemyBase
         {
             // 赤風船なら赤に白風船なら白に変化
             sr.color = redBalloon ? Color.red : Color.white;
+
         }
     }
     
@@ -76,7 +78,7 @@ public class BalloonEnemy : EnemyBase
             knockbackForce *= 2;
             redBalloon = false;
             UpdateBalloonColor();
-
+            ko.SetActive(false);
             StartCoroutine(MutekiCoroutine());
         }
     }

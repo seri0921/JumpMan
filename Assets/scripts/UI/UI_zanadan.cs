@@ -34,7 +34,7 @@ public class UI_zandan : MonoBehaviour
         if (textComponent != null)
         {
             int point = KillScore.LifeOrBullet;
-            textComponent.text = string.Format("{0:00}", point);
+            textComponent.text = string.Format("{0:0}", point);
         }
 
         // --- 2. í«è]èàóù ---
