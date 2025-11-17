@@ -39,7 +39,11 @@ public  class EnemyManagerTest : MonoBehaviour
         //  レベルアップ処理
         if (time >= levelupTime)
         {
-            currentLevel++;
+            if (currentLevel < 3)
+            {
+                currentLevel++;
+            }
+            else currentLevel = 3;
             SetLevel(currentLevel);
             time = 0;
         }

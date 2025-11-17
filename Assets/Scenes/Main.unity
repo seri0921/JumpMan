@@ -8224,7 +8224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4770d1c47f42e4c4191e23feccfdc93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelupTime: 30
+  levelupTime: 10
   limitTime: 90
   playerTransform: {fileID: 2008514253}
   DieTextPrefab: {fileID: 5175782000314521013, guid: ef1b2c71a5fb005469276c33780be3f7, type: 3}
