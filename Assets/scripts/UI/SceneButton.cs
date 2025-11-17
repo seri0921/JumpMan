@@ -45,7 +45,8 @@ public class SceneButton : MonoBehaviour
 
         yield return new WaitForSeconds(0.4f);
 
+
+
         SceneManager.LoadScene(sceneName);
     }
 }
-
