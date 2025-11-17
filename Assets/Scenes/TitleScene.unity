@@ -3776,7 +3776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c724f014e74e44f9d92b621309aeb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Main
+  sceneName: SousaSetu
   onSound: {fileID: 8300000, guid: 3624cce10fe89464ea31bcb262bae900, type: 3}
 --- !u!82 &1886255906
 AudioSource:
@@ -3790,7 +3790,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
