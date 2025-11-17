@@ -66,26 +66,6 @@ public class CameraShake : MonoBehaviour
     }
 
     /// <summary>
-    /// デバッグ用のキー入力チェック
-    /// </summary>
-    void Update()
-    {
-        //↓デバッグ用
-        //if(Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    ShakeCamera(ShakeType.Light);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha2))
-        //{
-        //    ShakeCamera(ShakeType.Medium);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha3))
-        //{
-        //    ShakeCamera(ShakeType.Heavy);
-        //}
-    }
-
-    /// <summary>
     /// カメラの初期化を行う
     /// </summary>
     private void InitializeCamera()

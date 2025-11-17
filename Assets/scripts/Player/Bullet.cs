@@ -1,8 +1,9 @@
+using System.Collections;
+using System.Net.NetworkInformation;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 using UnityEngine.SceneManagement;
-using System.Net.NetworkInformation;
 
 public class Bullet : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Color lineStartColor = new Color(1f, 1f, 1f, 1f); // 始点の色 (デフォルトは白の不透明)
     [SerializeField] private Color lineEndColor = new Color(1f, 1f, 1f, 0f);   // 終点の色 (デフォルトは白の透明)
 
+    private CameraShake cameraShake;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,7 @@ public class Bullet : MonoBehaviour
         lineRenderer.startColor = lineStartColor;
         lineRenderer.endColor = lineEndColor;
 
+        cameraShake = FindObjectOfType<CameraShake>();
     }
 
     // Update is called once per frame
@@ -104,6 +107,8 @@ public class Bullet : MonoBehaviour
         }
         if (spAttack.WasReleasedThisFrame())  // ボタンが離されたとき
         {
+            cameraShake.ShakeCamera(CameraShake.ShakeType.Medium);
+
             KillScore.LifeOrBullet --;
             AntiOn = true;
             Transform firepointTransform = firepoint.transform;
